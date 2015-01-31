@@ -41,3 +41,7 @@ TagManager:
     userID: 0
     uniqueID: 0
     locked: 0
+  - name: UnitsLayer
+    userID: 1
+    uniqueID: 1610196431
+    locked: 0
