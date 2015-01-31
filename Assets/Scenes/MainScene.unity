@@ -122,6 +122,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 406724203}
   - 212: {fileID: 406724204}
+  - 114: {fileID: 406724205}
   m_Layer: 0
   m_Name: element_1
   m_TagString: Untagged
@@ -163,6 +164,18 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 3f63eb7f23faf4c19a48ba9009a6dedf, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
+--- !u!114 &406724205
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 406724202}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 040df7f9d91844a0ea3bb3db7c95fe3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 5
 --- !u!1 &498834980
 GameObject:
   m_ObjectHideFlags: 0
@@ -516,6 +529,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1196235286}
   - 212: {fileID: 1196235287}
+  - 114: {fileID: 1196235288}
   m_Layer: 0
   m_Name: element_2
   m_TagString: Untagged
@@ -557,6 +571,18 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 3f63eb7f23faf4c19a48ba9009a6dedf, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
+--- !u!114 &1196235288
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1196235285}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 040df7f9d91844a0ea3bb3db7c95fe3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 5
 --- !u!1 &1379687156
 GameObject:
   m_ObjectHideFlags: 0
@@ -566,6 +592,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1379687158}
   - 212: {fileID: 1379687157}
+  - 114: {fileID: 1379687159}
   m_Layer: 0
   m_Name: element_3
   m_TagString: Untagged
@@ -607,6 +634,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 686099556}
   m_RootOrder: 2
+--- !u!114 &1379687159
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1379687156}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 040df7f9d91844a0ea3bb3db7c95fe3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 5
 --- !u!1 &1676332762
 GameObject:
   m_ObjectHideFlags: 0
@@ -616,6 +655,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1676332763}
   - 212: {fileID: 1676332764}
+  - 114: {fileID: 1676332765}
   m_Layer: 0
   m_Name: element_4
   m_TagString: Untagged
