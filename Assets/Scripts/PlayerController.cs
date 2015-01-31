@@ -30,10 +30,8 @@ public class PlayerController : MonoBehaviour
 			transform.position += new Vector3(0, direction.y, 0);
 		}
 
-		//Get the mouse input direction;
-		Vector3 currentPosition = transform.position;
+		//Get the mouse input direction and look at it
 		Vector3 mouseDirection = Camera.main.ScreenToWorldPoint( Input.mousePosition );
-
 		transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(mouseDirection.y - transform.position.y, mouseDirection.x - transform.position.x) * Mathf.Rad2Deg - 180);
 	}
 }
