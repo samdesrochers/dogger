@@ -27,8 +27,13 @@ public class WeaponClickController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetButtonDown("Fire1")) {
-			this.FireBullet();
+		if (Input.GetButton("Fire1")) {
+			Weapon weapon = this.weapons[this.currentWeapon];
+			if (weapon.CanFire()) {
+				Vector3 position = this.transform.position;
+				Vector3 target = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+				weapon.Fire(position, target, this.ProjectileForceModifier);
+			}
 		}
 
 		if (Input.GetKey(KeyCode.Alpha1)) {
@@ -46,21 +51,5 @@ public class WeaponClickController : MonoBehaviour {
 		if (Input.GetKey(KeyCode.Alpha4)) {
 			this.currentWeapon = 3;
 		}
-	}
-
-	private void FireBullet() {
-		Vector3 currentPos = this.transform.position;
-		Vector3 target = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-		Vector3 direction = target - currentPos;
-		
-		direction.z = 0;
-		direction.Normalize();
-		
-		float targetAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-		Weapon weapon = this.weapons[this.currentWeapon];
-
-		GameObject bulletInstance = (GameObject)Instantiate(weapon.ProjectilePrefab, this.transform.position, Quaternion.Euler(0, 0, targetAngle));
-		Vector2 force = direction * weapon.ProjectileForce * this.ProjectileForceModifier;
-		bulletInstance.GetComponent<Rigidbody2D>().AddForce(force, ForceMode2D.Impulse);
 	}
 }
