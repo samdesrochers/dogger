@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class BulletDefaultController : MonoBehaviour {
+public class ProjectileDefaultController : MonoBehaviour {
 
 	// Time before the bullet disappears, in seconds
 	public float TimeToLive = 5f;
