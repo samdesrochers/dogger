@@ -12,10 +12,10 @@ public class WeaponClickController : MonoBehaviour {
 	void Start () {
 		this.weapons = new List<Weapon>();
 
-		Weapon pistol = new Weapon("Prefabs/Projectiles/pistol", 15f, 0.7f);
-		Weapon smg = new Weapon("Prefabs/Projectiles/machine_gun", 20f, 0.2f);
-		Weapon laserRifle = new Weapon("Prefabs/Projectiles/laser_red", 30f, 1f);
-		Weapon photonRifle = new Weapon("Prefabs/Projectiles/photon", 5f, 1.5f);
+		Weapon pistol = new Weapon("Prefabs/Projectiles/pistol", 20f, 0.6f);
+		Weapon smg = new Weapon("Prefabs/Projectiles/machine_gun", 30f, 0.15f);
+		Weapon laserRifle = new Weapon("Prefabs/Projectiles/laser_red", 50f, 0.85f);
+		Weapon photonRifle = new Weapon("Prefabs/Projectiles/photon", 5f, 1.15f);
 
 		this.weapons.Add(pistol);
 		this.weapons.Add(smg);
