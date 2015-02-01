@@ -187,7 +187,7 @@ GameObject:
   - 212: {fileID: 498834981}
   - 114: {fileID: 498834983}
   - 61: {fileID: 498834984}
-  - 114: {fileID: 498834985}
+  - 114: {fileID: 498834986}
   m_Layer: 0
   m_Name: player
   m_TagString: Player
@@ -252,7 +252,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_Size: {x: .712359786, y: 1.02928519}
   m_Center: {x: .016696319, y: -.0207959414}
---- !u!114 &498834985
+--- !u!114 &498834986
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -260,11 +260,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 498834980}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 363fbd0c71e4c76429ea396350ed59c9, type: 3}
+  m_Script: {fileID: 11500000, guid: 5db3613a53c897444921a55eed5b496c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BulletPrefab: {fileID: 5000000, guid: 97c64833185b10849933bd681e39d10e, type: 2}
-  ForwardForce: 1000
+  ProjectilePrefab: {fileID: 5000000, guid: 97c64833185b10849933bd681e39d10e, type: 2}
+  ProjectileForceModifier: 1
 --- !u!1 &686099555
 GameObject:
   m_ObjectHideFlags: 0
