@@ -4,39 +4,38 @@ using System.Collections;
 
 public class PlayerController : MonoBehaviour
 {
-	public float walkSpeed = 3f;
+	public float walkSpeed = 6f;
 	RaycastHit2D hit;
-	BoxCollider2D boxCollider;
-//	public float turnSpeed;
-	private Vector3 moveDirection;
-	
+
+	private Rigidbody2D cachedRigidBody2D;
+
 	void Start()
 	{
-		//To do keyvohn, collider
-		//		boxCollider = GetComponent<BoxCollider2D>();
+		this.cachedRigidBody2D = this.GetComponent<Rigidbody2D>();
 	}
+
 	
-	void Update()
+	void FixedUpdate()
 	{
-		//To do keyvohn, collider
-		var direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")) * walkSpeed * Time.deltaTime;
+		Vector2 inputKeys = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
+		//Move the player
+		if (inputKeys.x != 0 || inputKeys.y != 0) {
+			var direction = inputKeys * walkSpeed * Time.deltaTime;
 
-		//		hit = Physics2D.BoxCast(transform.position, boxCollider.size, 0, new Vector2(0, direction.y), Mathf.Abs(direction.y));
-		//		if (hit.collider == null)
-		//		{
-		transform.position += new Vector3(direction.x, direction.y, 0);
-		//		}
-		//		hit = Physics2D.BoxCast(transform.position, boxCollider.size, 0, new Vector2(direction.x,0), Mathf.Abs(direction.x));
-		//		if (hit.collider == null)
-		//		{
-//		transform.Translate(direction.x, 0, 0);
-		//		}
+			this.rigidbody2D.MovePosition ((Vector2)transform.position + direction);
+		} 
+		else 
+		{
+			//Stap movin da player
+			this.rigidbody2D.velocity = new Vector2 (0,0);
+			this.rigidbody2D.angularVelocity = 0;
+		}
 
-		//Get the mouse input direction;
-		Vector3 currentPosition = transform.position;
 		Vector3 mouseDirection = Camera.main.ScreenToWorldPoint( Input.mousePosition );
 
+		//Player looks at the cursor
 		transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(mouseDirection.y - transform.position.y, mouseDirection.x - transform.position.x) * Mathf.Rad2Deg - 180);
 	}
 }
+
