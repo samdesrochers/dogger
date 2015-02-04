@@ -4,7 +4,7 @@ using System.Collections;
 
 public class PlayerController : MonoBehaviour
 {
-	public float walkSpeed = 6f;
+	public float walkSpeed = 4f;
 	RaycastHit2D hit;
 
 	private Rigidbody2D cachedRigidBody2D;
@@ -21,9 +21,10 @@ public class PlayerController : MonoBehaviour
 
 		//Move the player
 		if (inputKeys.x != 0 || inputKeys.y != 0) {
-			var direction = inputKeys * walkSpeed * Time.deltaTime;
+			var direction = inputKeys * walkSpeed * Time.deltaTime * 100;
 
-			this.rigidbody2D.MovePosition ((Vector2)transform.position + direction);
+			this.rigidbody2D.velocity = direction;
+			this.rigidbody2D.angularVelocity = 0;
 		} 
 		else 
 		{
