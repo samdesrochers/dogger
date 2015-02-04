@@ -18,7 +18,7 @@ public class PlayerController : MonoBehaviour
 	void FixedUpdate()
 	{
 		Vector2 inputKeys = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-
+		inputKeys.Normalize ();
 		//Move the player
 		if (inputKeys.x != 0 || inputKeys.y != 0) {
 			var direction = inputKeys * walkSpeed * Time.deltaTime * 100;
