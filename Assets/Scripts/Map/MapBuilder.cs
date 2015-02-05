@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 public class MapBuilder : MonoBehaviour {
 
@@ -24,6 +25,11 @@ public class MapBuilder : MonoBehaviour {
 	void GenreateDungeon()
 	{
 		GenerateRandomDungeon(InitialPosition, DesiredSize);
+
+		for (int i = 0; i < 15; i++) {
+			AddRandomSections ();
+		}
+
 		GenerateDungeonBorder ();
 		FillWorld ();
 	}
@@ -33,7 +39,9 @@ public class MapBuilder : MonoBehaviour {
 		if (remainingDepth == 0)
 			return;
 
-		int randSizeDecider = (Random.Range(0,100) < 60) ? 5 : 15;
+		int randSizeDecider = Random.Range(3,20);
+
+		//int randSizeDecider = (Random.Range(0,100) < 60) ? 9 : 12;
 		List<Tile> section = GetNxNSection (initialPosition, randSizeDecider);
 		foreach (var t in section) {
 			string key = PositionToKey(t.Position);
@@ -45,13 +53,16 @@ public class MapBuilder : MonoBehaviour {
 
 		remainingDepth--;
 		Tile nextEdge = GetRandomEdge (section);
-		GenerateRandomDungeon (nextEdge.Position, remainingDepth);
+
+		if(nextEdge != null)
+			GenerateRandomDungeon (nextEdge.Position, remainingDepth);
 	}
 
 	Tile GetRandomEdge(List<Tile> lastSection)
 	{
-		while (true) {	
-			int rand = Random.Range(0,lastSection.Count - 1);
+		int edgeCount = lastSection.Count - 1;
+		while (edgeCount > 0) {	
+			int rand = Random.Range(0, edgeCount);
 
 			Tile t = lastSection[rand];
 			lastSection.Remove(t);
@@ -64,7 +75,11 @@ public class MapBuilder : MonoBehaviour {
 			// Retrurn first edge that doesn't have 4 adjacent tiles
 			if(count < 4)
 				return t;
+
+			edgeCount--;
 		}
+
+		return null;
 	}
 
 	List<Tile> GetNxNSection(Vector2 origin, int size)
@@ -86,6 +101,16 @@ public class MapBuilder : MonoBehaviour {
 		}
 
 		return tiles;
+	}
+
+	void AddRandomSections()
+	{
+		int randomSize = Random.Range (2, 30);
+		int rand = Random.Range (0, TilePositions.Count - 1);
+		Tile t = TilePositions.ElementAt(rand).Value;
+
+		Vector2 seed = t.Position;
+		GenerateRandomDungeon(seed, randomSize);
 	}
 
 	void GenerateDungeonBorder() 
@@ -120,14 +145,14 @@ public class MapBuilder : MonoBehaviour {
 	{
 		GameObject groundTile = (GameObject)Instantiate(this.tilePrefab, this.transform.position, Quaternion.identity);
 		groundTile.transform.position = position;
-		groundTile.transform.parent = transform.FindChild("StartingPoint");
+		groundTile.transform.parent = transform.Find("Map");
 	}
 
 	void AddBorderTile(Vector2 position){
 		GameObject borderTile = (GameObject)Instantiate(this.borderPrefab, this.transform.position, Quaternion.identity);
 
 		borderTile.transform.position = position;
-		borderTile.transform.parent = transform.FindChild("StartingPoint");
+		borderTile.transform.parent = transform.FindChild("Map");
 	}
 
 	string PositionToKey(Vector2 pos)
