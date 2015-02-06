@@ -8,35 +8,70 @@ public class PlayerController : MonoBehaviour
 	RaycastHit2D hit;
 
 	private Rigidbody2D cachedRigidBody2D;
+	private bool isDashing;
+	private float dashCooldown = 1.0f;
+	private float lastDashTime = -100f;
+	private float dashDuration = 0.2f;
 
 	void Start()
 	{
 		this.cachedRigidBody2D = this.GetComponent<Rigidbody2D>();
+		this.isDashing = false;
 	}
-
 	
 	void FixedUpdate()
 	{
-		Vector2 inputKeys = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-		inputKeys.Normalize ();
-		//Move the player
-		if (inputKeys.x != 0 || inputKeys.y != 0) {
-			var direction = inputKeys * walkSpeed * Time.deltaTime * 100;
+		this.movePlayerIfNeeded ();
 
-			this.rigidbody2D.velocity = direction;
+		this.ajustPlayerRotation ();
+	}
+
+	void ajustPlayerRotation()
+	{
+		Vector3 mouseDirection = Camera.main.ScreenToWorldPoint( Input.mousePosition );
+		
+		//Player looks at the cursor
+		transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(mouseDirection.y - transform.position.y, mouseDirection.x - transform.position.x) * Mathf.Rad2Deg - 180);
+	}
+
+	void movePlayerIfNeeded()
+	{
+		//Dash 
+		// Stop the dash if it is in progress
+		if (this.isDashing && (Time.time - this.lastDashTime > this.dashDuration)) {
+			this.isDashing = false;
+		}
+
+		if (this.isDashing) {
+			return;
+		}
+
+		if (Input.GetKeyDown ("space") && this.canDash())
+		{
+			this.lastDashTime = Time.time;
+			this.isDashing = true;
+			this.rigidbody2D.velocity = this.rigidbody2D.velocity * 3;
+			Debug.Log("yo pogo");
+		}
+		//Move the player
+		else if (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0) 
+		{
+			Vector2 inputKeys = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+			inputKeys.Normalize ();
+			
+			this.rigidbody2D.velocity = inputKeys * walkSpeed * Time.deltaTime * 100;
 			this.rigidbody2D.angularVelocity = 0;
 		} 
-		else 
+		else
 		{
 			//Stap movin da player
 			this.rigidbody2D.velocity = new Vector2 (0,0);
 			this.rigidbody2D.angularVelocity = 0;
 		}
+	}
 
-		Vector3 mouseDirection = Camera.main.ScreenToWorldPoint( Input.mousePosition );
-
-		//Player looks at the cursor
-		transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(mouseDirection.y - transform.position.y, mouseDirection.x - transform.position.x) * Mathf.Rad2Deg - 180);
+	bool canDash()
+	{
+		return Time.time > this.lastDashTime + this.dashCooldown;
 	}
 }
-
