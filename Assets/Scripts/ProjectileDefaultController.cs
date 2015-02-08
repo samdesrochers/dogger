@@ -32,7 +32,7 @@ public class ProjectileDefaultController : MonoBehaviour {
 			pogo.Play();
 
 			Debug.Log("Dam son dat bullet hit !!!");
-			coll.gameObject.SendMessage("TakeDamage", 10, SendMessageOptions.RequireReceiver);
+			coll.gameObject.SendMessage("TakeDamage", 10, SendMessageOptions.DontRequireReceiver);
 //			Destroy (this.gameObject);	
 		}
 	}
