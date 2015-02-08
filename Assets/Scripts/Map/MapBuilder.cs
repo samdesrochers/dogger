@@ -21,7 +21,7 @@ public class MapBuilder : MonoBehaviour {
 		tilePrefab = Resources.Load("Prefabs/MapObjects/Ground");
 		borderPrefab = Resources.Load("Prefabs/MapObjects/Border");
 
-		GenreateRandomDungeon ();
+		//GenreateRandomDungeon ();
 
 		//10, 9, 5 (huge)
 		//8, 9, 3 (big)
