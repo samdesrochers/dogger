@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
 
 	private Rigidbody2D cachedRigidBody2D;
 	private bool isDashing;
-	private float dashCooldown = 1.0f;
+	private float dashCooldown = 0.6f;
 	private float lastDashTime = -100f;
 	private float dashDuration = 0.2f;
 
@@ -50,8 +50,7 @@ public class PlayerController : MonoBehaviour
 		{
 			this.lastDashTime = Time.time;
 			this.isDashing = true;
-			this.rigidbody2D.velocity = this.rigidbody2D.velocity * 3;
-			Debug.Log("yo pogo");
+			this.cachedRigidBody2D.velocity = this.cachedRigidBody2D.velocity * 3;
 		}
 		//Move the player
 		else if (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0) 
@@ -59,14 +58,14 @@ public class PlayerController : MonoBehaviour
 			Vector2 inputKeys = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 			inputKeys.Normalize ();
 			
-			this.rigidbody2D.velocity = inputKeys * walkSpeed * Time.deltaTime * 100;
-			this.rigidbody2D.angularVelocity = 0;
+			this.cachedRigidBody2D.velocity = inputKeys * walkSpeed * Time.deltaTime * 100;
+			this.cachedRigidBody2D.angularVelocity = 0;
 		} 
 		else
 		{
 			//Stap movin da player
-			this.rigidbody2D.velocity = new Vector2 (0,0);
-			this.rigidbody2D.angularVelocity = 0;
+			this.cachedRigidBody2D.velocity = new Vector2 (0,0);
+			this.cachedRigidBody2D.angularVelocity = 0;
 		}
 	}
 

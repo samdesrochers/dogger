@@ -17,4 +17,14 @@ public class ProjectileDefaultController : MonoBehaviour {
 	void Update () {
 
 	}
+
+	void OnCollisionEnter2D(Collision2D coll
+	                     ) {
+		// To change keyvohn
+		if (coll.gameObject.tag != "Player") {
+			Debug.Log("Dam son dat bullet hit !!!");
+			coll.gameObject.SendMessage("TakeDamage", 10, SendMessageOptions.RequireReceiver);
+			Destroy (this.gameObject);	
+		}
+	}
 }

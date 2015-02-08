@@ -142,7 +142,6 @@ public class MapBuilder : MonoBehaviour {
 			}		
 		}
 
-		Tile[] z = tiles.ToArray();
 		return tiles;
 	}
 
