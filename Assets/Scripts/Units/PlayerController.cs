@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
 
 	private Rigidbody2D cachedRigidBody2D;
 	private bool isDashing;
-	private float dashCooldown = 1.0f;
+	private float dashCooldown = 0.6f;
 	private float lastDashTime = -100f;
 	private float dashDuration = 0.2f;
 
