@@ -22,9 +22,18 @@ public class ProjectileDefaultController : MonoBehaviour {
 	                     ) {
 		// To change keyvohn
 		if (coll.gameObject.tag != "Player") {
+			// Blood splash
+			Object projectilePrefab = Resources.Load("Prefabs/Projectiles/bloodSplash");;
+			GameObject e = (GameObject)Instantiate(projectilePrefab, coll.gameObject.transform.position, Quaternion.Euler(0, 0, 0));
+
+			ParticleSystem pogo = e.GetComponent<ParticleSystem>();
+			pogo.gameObject.SetActive(true);
+			pogo.enableEmission = true;
+			pogo.Play();
+
 			Debug.Log("Dam son dat bullet hit !!!");
 			coll.gameObject.SendMessage("TakeDamage", 10, SendMessageOptions.RequireReceiver);
-			Destroy (this.gameObject);	
+//			Destroy (this.gameObject);	
 		}
 	}
 }
