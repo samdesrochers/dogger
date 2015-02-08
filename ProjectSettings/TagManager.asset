@@ -45,3 +45,11 @@ TagManager:
     userID: 1
     uniqueID: 1610196431
     locked: 0
+  - name: ProjectilesLayer
+    userID: 2
+    uniqueID: 3860608693
+    locked: 0
+  - name: WeaponsLayer
+    userID: 3
+    uniqueID: 5393917
+    locked: 0
