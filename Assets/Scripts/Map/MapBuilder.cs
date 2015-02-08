@@ -5,8 +5,15 @@ using System.Linq;
 
 public class MapBuilder : MonoBehaviour {
 
-	public Dictionary<string, Tile> TilePositions = new Dictionary<string, Tile>();
-	public Dictionary<string, Tile> BorderPositions = new Dictionary<string, Tile>();
+	/// <summary>
+	/// The map tiles.
+	/// </summary>
+	public Dictionary<string, Tile> MapTiles = new Dictionary<string, Tile>();
+
+	/// <summary>
+	/// The map borders.
+	/// </summary>
+	public Dictionary<string, Tile> MapBorders = new Dictionary<string, Tile>();
 
 	public Vector2 InitialPosition;
 	public int DesiredSize;
@@ -14,25 +21,26 @@ public class MapBuilder : MonoBehaviour {
 	private Object tilePrefab;
 	private Object borderPrefab;
 
-	private const int randomSections = 15;
+	private int randomSections = 15;
 
 	void Start () {
 
 		tilePrefab = Resources.Load("Prefabs/MapObjects/Ground");
 		borderPrefab = Resources.Load("Prefabs/MapObjects/Border");
 
-		//GenreateRandomDungeon ();
+		GenreateRandomDungeon ();
 
 		//10, 9, 5 (huge)
 		//8, 9, 3 (big)
 		//6, 5, 1 (medium)
 		//5, 4, 1 (small)
-		GenerateGridArena (5, 4, 1);
+		//GenerateGridArena (5, 4, 1);
 
 		GenerateDungeonBorder ();
 		FillWorld ();
 	}
 
+	// Generates a SQAURE, "Column" separated map
 	void GenerateGridArena(int mapSize, int sectionSize, int spacer)
 	{
 		List<List<Tile>> sections = new List<List<Tile>> ();
@@ -63,13 +71,14 @@ public class MapBuilder : MonoBehaviour {
 
 		foreach (List<Tile> tiles in sections) {
 			foreach (Tile t in tiles) {
-				if (!TilePositions.ContainsKey (PositionToKey (t.Position))) {
-					TilePositions.Add (PositionToKey (t.Position), t);
+				if (!MapTiles.ContainsKey (PositionToKey (t.Position))) {
+					MapTiles.Add (PositionToKey (t.Position), t);
 				}
 			}
 		}
 	}
 
+	// Generate a completely random dungeon
 	void GenreateRandomDungeon()
 	{
 		GenerateRandomDungeon(InitialPosition, DesiredSize);
@@ -87,9 +96,9 @@ public class MapBuilder : MonoBehaviour {
 		List<Tile> section = GetNxNSection (initialPosition, randSizeDecider);
 		foreach (var t in section) {
 			string key = PositionToKey(t.Position);
-			if(!TilePositions.ContainsKey(key))
+			if(!MapTiles.ContainsKey(key))
 			{
-				TilePositions.Add(key, t);
+				MapTiles.Add(key, t);
 			}
 		}
 
@@ -100,6 +109,8 @@ public class MapBuilder : MonoBehaviour {
 			GenerateRandomDungeon (nextEdge.Position, remainingDepth);
 	}
 
+	// Picks an edge at random, returns null if none found
+	// EDGE : tile that has at least 1 non-ground adjacent tile
 	Tile GetRandomEdge(List<Tile> lastSection)
 	{
 		int edgeCount = lastSection.Count - 1;
@@ -111,7 +122,7 @@ public class MapBuilder : MonoBehaviour {
 		
 			int count = 1;
 			foreach(var pos in t.Adjacents) 
-				if(TilePositions.ContainsKey(PositionToKey(pos)))
+				if(MapTiles.ContainsKey(PositionToKey(pos)))
 					count++;
 
 			// Retrurn first edge that doesn't have 4 adjacent tiles
@@ -124,6 +135,15 @@ public class MapBuilder : MonoBehaviour {
 		return null;
 	}
 
+	// Returns a ground square section of size N. 
+	// Should only use odd size number for best results
+	// Origin is always at the very middle of the NxN section
+	// ex : origin = 1,1   size = 3
+	//	
+	//	returns :	[0,2] [1,2] [2,2]	
+	//				[0,1] [1,1] [2,1]
+	//				[0,0] [1,0] [2,0] 
+	// As a List of Tiles
 	List<Tile> GetNxNSection(Vector2 origin, int size)
 	{
 		List<Tile> tiles = new List<Tile> ();
@@ -144,75 +164,46 @@ public class MapBuilder : MonoBehaviour {
 
 		return tiles;
 	}
-
+	
 	void AddRandomSections()
 	{
 		int randomSize = Random.Range (2, 30);
-		int rand = Random.Range (0, TilePositions.Count - 1);
-		Tile t = TilePositions.ElementAt(rand).Value;
+		int rand = Random.Range (0, MapTiles.Count - 1);
+		Tile t = MapTiles.ElementAt(rand).Value;
 
 		Vector2 seed = t.Position;
 		GenerateRandomDungeon(seed, randomSize);
 	}
 
+	// Generates the borders of the dungeon once all the ground 
+	// has been set up in the MapTiles List
 	void GenerateDungeonBorder() 
 	{
 		// Initial construction of all basic borders
-		foreach (Tile t in TilePositions.Values) 
+		foreach (Tile t in MapTiles.Values) 
 		{
 			foreach(var adjacent in t.Adjacents)
 			{
 				string edgeKey = PositionToKey(adjacent);
-				if(!TilePositions.ContainsKey(edgeKey))
+				if(!MapTiles.ContainsKey(edgeKey))
 				{
-					if(!BorderPositions.ContainsKey(edgeKey))
+					if(!MapBorders.ContainsKey(edgeKey))
 					{
 						Tile border = new Tile(adjacent);
-						BorderPositions.Add(edgeKey, border);
+						MapBorders.Add(edgeKey, border);
 					}
 				}
 			}
 		}
-
-//		List<Tile> additionalBorders = new List<Tile>();
-//
-//		// Fill corners
-//		foreach (var border in BorderPositions) 
-//		{
-//			string grandParentKey = PositionToKey(border.Value.Position);
-//			foreach(var adj in border.Value.Adjacents)
-//			{
-//				Tile temp = new Tile(adj);
-//				string parentKey = PositionToKey(adj);
-//
-//				foreach(var tempAdjPos in temp.Adjacents)
-//				{
-//					string key = PositionToKey(tempAdjPos);
-//
-//					if(key.Equals(parentKey) || key.Equals(grandParentKey))
-//						continue;
-//					else if(TilePositions.ContainsKey(key))
-//						continue;
-//					else if (BorderPositions.ContainsKey(key))
-//						continue;
-//
-//					Tile newBorder = new Tile(tempAdjPos);
-//					additionalBorders.Add(newBorder);
-//				}
-//			}
-//		}
-//
-//		foreach (Tile t in additionalBorders) {
-//			BorderPositions.Add(PositionToKey(t.Position), t);
-//		}
 	}
 
+	// Adds prefab for both ground and border positions
 	void FillWorld()
 	{
-		foreach (var pos in TilePositions.Values) 
+		foreach (var pos in MapTiles.Values) 
 			AddGroundTile(pos.Position);
 
-		foreach (var pos in BorderPositions.Values) 
+		foreach (var pos in MapBorders.Values) 
 			AddBorderTile(pos.Position);	
 	}
 
@@ -230,6 +221,7 @@ public class MapBuilder : MonoBehaviour {
 		borderTile.transform.parent = transform.FindChild("Map");
 	}
 
+	// Util key convert fo unified values in different dictionaries
 	string PositionToKey(Vector2 pos)
 	{
 		return "x"+pos.x.ToString()+"y"+pos.y.ToString();
