@@ -14,16 +14,22 @@ public class MapBuilder : MonoBehaviour {
 	private Object tilePrefab;
 	private Object borderPrefab;
 
+	private const int randomSections = 15;
+
 	void Start () {
 
 		tilePrefab = Resources.Load("Prefabs/MapObjects/Ground");
 		borderPrefab = Resources.Load("Prefabs/MapObjects/Border");
 
-		//GenreateDungeon ();
+		GenreateRandomDungeon ();
 
-		GenerateGridArena (6, 9, 3);
+		//10, 9, 5 (huge)
+		//8, 9, 3 (big)
+		//6, 5, 1 (medium)
+		//5, 4, 1 (small)
+		GenerateGridArena (5, 4, 1);
 
-		//GenerateDungeonBorder ();
+		GenerateDungeonBorder ();
 		FillWorld ();
 	}
 
@@ -33,7 +39,7 @@ public class MapBuilder : MonoBehaviour {
 
 		for (int i = 0; i < mapSize; i++) 
 		{
-			for (int j = 0; j < mapSize + spacer-1; j++) 
+			for (int j = 0; j < mapSize + spacer; j++) 
 			{
 				int nextX = (sectionSize + spacer) * i;
 				int nextY = (sectionSize) * j;
@@ -43,7 +49,7 @@ public class MapBuilder : MonoBehaviour {
 			}	
 		}
 
-		for (int i = 0; i < mapSize + spacer-1; i++) 
+		for (int i = 0; i < mapSize + spacer; i++) 
 		{
 			for (int j = 0; j < mapSize; j++) 
 			{
@@ -64,10 +70,10 @@ public class MapBuilder : MonoBehaviour {
 		}
 	}
 
-	void GenreateDungeon()
+	void GenreateRandomDungeon()
 	{
 		GenerateRandomDungeon(InitialPosition, DesiredSize);
-		for (int i = 0; i < 15; i++) {
+		for (int i = 0; i < randomSections; i++) {
 			AddRandomSections ();
 		}
 	}
@@ -78,8 +84,6 @@ public class MapBuilder : MonoBehaviour {
 			return;
 
 		int randSizeDecider = Random.Range(3,20);
-
-		//int randSizeDecider = (Random.Range(0,100) < 60) ? 9 : 12;
 		List<Tile> section = GetNxNSection (initialPosition, randSizeDecider);
 		foreach (var t in section) {
 			string key = PositionToKey(t.Position);
@@ -129,11 +133,6 @@ public class MapBuilder : MonoBehaviour {
 		center.Flagged = true;
 		tiles.Add (center);
 
-		if (origin.x == 10) {
-			int a = 1;
-		}
-			
-
 		for (int i = 0; i < size; i++) 
 		{
 			for(int j = size - 1; j >= 0; j--)
@@ -143,6 +142,7 @@ public class MapBuilder : MonoBehaviour {
 			}		
 		}
 
+		Tile[] z = tiles.ToArray();
 		return tiles;
 	}
 
@@ -158,6 +158,7 @@ public class MapBuilder : MonoBehaviour {
 
 	void GenerateDungeonBorder() 
 	{
+		// Initial construction of all basic borders
 		foreach (Tile t in TilePositions.Values) 
 		{
 			foreach(var adjacent in t.Adjacents)
@@ -173,6 +174,38 @@ public class MapBuilder : MonoBehaviour {
 				}
 			}
 		}
+
+//		List<Tile> additionalBorders = new List<Tile>();
+//
+//		// Fill corners
+//		foreach (var border in BorderPositions) 
+//		{
+//			string grandParentKey = PositionToKey(border.Value.Position);
+//			foreach(var adj in border.Value.Adjacents)
+//			{
+//				Tile temp = new Tile(adj);
+//				string parentKey = PositionToKey(adj);
+//
+//				foreach(var tempAdjPos in temp.Adjacents)
+//				{
+//					string key = PositionToKey(tempAdjPos);
+//
+//					if(key.Equals(parentKey) || key.Equals(grandParentKey))
+//						continue;
+//					else if(TilePositions.ContainsKey(key))
+//						continue;
+//					else if (BorderPositions.ContainsKey(key))
+//						continue;
+//
+//					Tile newBorder = new Tile(tempAdjPos);
+//					additionalBorders.Add(newBorder);
+//				}
+//			}
+//		}
+//
+//		foreach (Tile t in additionalBorders) {
+//			BorderPositions.Add(PositionToKey(t.Position), t);
+//		}
 	}
 
 	void FillWorld()
@@ -200,6 +233,6 @@ public class MapBuilder : MonoBehaviour {
 
 	string PositionToKey(Vector2 pos)
 	{
-		return pos.x.ToString()+"_"+pos.y.ToString();
+		return "x"+pos.x.ToString()+"y"+pos.y.ToString();
 	}
 }
