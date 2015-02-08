@@ -129,9 +129,9 @@ public class MapBuilder : MonoBehaviour {
 		center.Flagged = true;
 		tiles.Add (center);
 
-		if (origin.x == 10) {
-			int a = 1;
-		}
+//		if (origin.x == 10) {
+//			int a = 1;
+//		}
 			
 
 		for (int i = 0; i < size; i++) 
