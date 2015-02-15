@@ -34,7 +34,7 @@ public class MapBuilder : MonoBehaviour {
 		//8, 9, 3 (big)
 		//6, 5, 1 (medium)
 		//5, 4, 1 (small)
-		//GenerateGridArena (5, 4, 1);
+		//GenerateGridArena (10, 9, 5);
 
 		GenerateDungeonBorder ();
 		FillWorld ();
