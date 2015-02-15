@@ -4,17 +4,17 @@ using System.Collections.Generic;
 public class WeaponClickController : MonoBehaviour {
 	public float minAimDistance = 1.4f;
 	
-	private List<Weapon> weapons;
+	private List<OldWeapon> weapons;
 	private int currentWeapon;
 	
 	// Use this for initialization
 	void Start () {
-		this.weapons = new List<Weapon>();
+		this.weapons = new List<OldWeapon>();
 		
-		Weapon pistol = new Weapon("Prefabs/Projectiles/pistol", 20f, 0.0f);
-		Weapon smg = new Weapon("Prefabs/Projectiles/machine_gun", 30f, 0.1f);
-		Weapon laserRifle = new Weapon("Prefabs/Projectiles/laser_red", 35f, 0.5f);
-		Weapon photonRifle = new Weapon("Prefabs/Projectiles/photon", 5f, 0.75f);
+		OldWeapon pistol = new OldWeapon("Prefabs/Projectiles/pistol", 20f, 0.0f);
+		OldWeapon smg = new OldWeapon("Prefabs/Projectiles/machine_gun", 30f, 0.1f);
+		OldWeapon laserRifle = new OldWeapon("Prefabs/Projectiles/laser_red", 35f, 0.5f);
+		OldWeapon photonRifle = new OldWeapon("Prefabs/Projectiles/photon", 5f, 0.75f);
 		
 		this.weapons.Add(pistol);
 		this.weapons.Add(smg);
@@ -42,7 +42,7 @@ public class WeaponClickController : MonoBehaviour {
 		
 		// Fire weapon
 		if (Input.GetButton("Fire1")) {
-			Weapon weapon = this.weapons[this.currentWeapon];
+			OldWeapon weapon = this.weapons[this.currentWeapon];
 			if (weapon.CanFire()) {
 				weapon.Fire(leftGun, mouseTarget);
 			}
@@ -50,7 +50,7 @@ public class WeaponClickController : MonoBehaviour {
 		
 		// Release trigger
 		if (Input.GetButtonUp ("Fire1")) {
-			foreach(Weapon w in this.weapons) {
+			foreach(OldWeapon w in this.weapons) {
 				w.ReleaseTrigger();
 			}
 		}
