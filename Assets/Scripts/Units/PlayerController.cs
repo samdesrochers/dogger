@@ -73,4 +73,11 @@ public class PlayerController : MonoBehaviour
 	{
 		return Time.time > this.lastDashTime + this.dashCooldown;
 	}
+
+
+	// Debug puprose
+	public Vector2 GetPosition()
+	{
+		return new Vector2(transform.position.x, transform.position.y);
+	}
 }
