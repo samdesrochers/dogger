@@ -12,18 +12,16 @@ public class GameManager : MonoBehaviour {
 
 	void Start () {
 		//Instanciate the player - to do
-		//this.player = (GameObject)Instantiate(Resources.Load("Prefabs/player"), new Vector3(2,0,0), new Quaternion(0, 0, 0, 0));
+		this.Player = (GameObject)Instantiate(Resources.Load("Prefabs/Player"), new Vector3(2,0,0), new Quaternion(0, 0, 0, 0));
 
 		playerHp = Player.GetComponent<UnitHealth> ();
 
 		//Create the ennemies - to do keyvohn, generate from the map tile
 		enemies = new List<GameObject>();
-		enemies.Add ((GameObject)Instantiate(Resources.Load("Prefabs/viciousCat"), new Vector3(2,0,0), Quaternion.identity));
-		enemies.Add ((GameObject)Instantiate(Resources.Load("Prefabs/viciousCat"), new Vector3(2,0,0), Quaternion.identity));
-		enemies.Add ((GameObject)Instantiate(Resources.Load("Prefabs/viciousCat"), new Vector3(2,0,0), Quaternion.identity));
-		enemies.Add ((GameObject)Instantiate(Resources.Load("Prefabs/viciousCat"), new Vector3(2,0,0), Quaternion.identity));
-		enemies.Add ((GameObject)Instantiate(Resources.Load("Prefabs/viciousCat"), new Vector3(2,0,0), Quaternion.identity));
-		enemies.Add ((GameObject)Instantiate(Resources.Load("Prefabs/viciousCat"), new Vector3(2,0,0), Quaternion.identity));
+		for (int i=0; i < 4; ++i)
+		{
+			enemies.Add ((GameObject)Instantiate(Resources.Load("Prefabs/viciousCat"), new Vector3(2,0,0), Quaternion.identity));
+		}
 	}
 	
 	void Update () {

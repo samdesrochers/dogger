@@ -14,7 +14,7 @@ GameObject:
   - 114: {fileID: 11400002}
   - 50: {fileID: 5000000}
   m_Layer: 0
-  m_Name: viciousCat
+  m_Name: ViciousCat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
