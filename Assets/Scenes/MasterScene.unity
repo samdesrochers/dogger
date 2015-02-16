@@ -423,7 +423,7 @@ RectTransform:
   m_RootOrder: 1
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 60, y: -361.399994}
+  m_AnchoredPosition: {x: 162, y: -40}
   m_SizeDelta: {x: 100, y: 64}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &442479134
@@ -569,6 +569,18 @@ Prefab:
       propertyPath: GameManager
       value: 
       objectReference: {fileID: 393493084}
+    - target: {fileID: 22499414, guid: e04b3b877fad84a258d552384f4cd0be, type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: -40
+      objectReference: {fileID: 0}
+    - target: {fileID: 22499414, guid: e04b3b877fad84a258d552384f4cd0be, type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: 162
+      objectReference: {fileID: 0}
+    - target: {fileID: 22499424, guid: e04b3b877fad84a258d552384f4cd0be, type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: -40
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e04b3b877fad84a258d552384f4cd0be, type: 2}
   m_RootGameObject: {fileID: 68981911}
@@ -1289,7 +1301,7 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 60, y: -40.2000008}
+  m_AnchoredPosition: {x: 60, y: -40}
   m_SizeDelta: {x: 100, y: 64}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &1776064093

@@ -593,7 +593,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   InitialPosition: {x: 0, y: 0}
-  DesiredSize: 80
+  DesiredSize: 40
 --- !u!1 &706031609
 GameObject:
   m_ObjectHideFlags: 0
@@ -878,7 +878,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: .192156866, g: .301960796, b: .474509805, a: .0196078438}
+  m_BackGroundColor: {r: .220588207, g: .220588207, b: .220588207, a: .0196078438}
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
