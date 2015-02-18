@@ -8,12 +8,19 @@ public class MapBuilder : MonoBehaviour {
 	/// <summary>
 	/// The map tiles.
 	/// </summary>
-	public Dictionary<string, Tile> MapTiles = new Dictionary<string, Tile>();
+	public Dictionary<string, Tile> MapTiles;
 
 	/// <summary>
 	/// The map borders.
 	/// </summary>
-	public Dictionary<string, Tile> MapBorders = new Dictionary<string, Tile>();
+	public Dictionary<string, Tile> MapBorders;
+
+
+	/// <summary>
+	/// The map potential spawn points.
+	/// Spawn point will be located away from any wall.
+	/// </summary>
+	public List<Vector2> PotentialSpawnPoints;
 
 	public Vector2 InitialPosition;
 	public int DesiredSize;
@@ -23,8 +30,12 @@ public class MapBuilder : MonoBehaviour {
 
 	private int randomSections = 15;
 
-	void Start () {
+	void Awake () {
 
+		MapTiles = new Dictionary<string, Tile> ();
+		MapBorders = new Dictionary<string, Tile> ();
+		PotentialSpawnPoints = new List<Vector2> ();
+		
 		tilePrefab = Resources.Load("Prefabs/MapObjects/Ground");
 		borderPrefab = Resources.Load("Prefabs/MapObjects/Border");
 
@@ -39,6 +50,14 @@ public class MapBuilder : MonoBehaviour {
 		GenerateDungeonBorder ();
 		FillWorld ();
 	}
+
+	#region Public Methods
+	public Vector2 GetRandomSpawnPoint()
+	{
+		int rand = Random.Range (0, PotentialSpawnPoints.Count - 1);
+		return PotentialSpawnPoints[rand];
+	}
+	#endregion
 
 	// Generates a SQAURE, "Column" separated map
 	void GenerateGridArena(int mapSize, int sectionSize, int spacer)
@@ -82,6 +101,7 @@ public class MapBuilder : MonoBehaviour {
 	void GenreateRandomDungeon()
 	{
 		GenerateRandomDungeon(InitialPosition, DesiredSize);
+		PotentialSpawnPoints.Add (InitialPosition);
 		for (int i = 0; i < randomSections; i++) {
 			AddRandomSections ();
 		}
@@ -105,8 +125,10 @@ public class MapBuilder : MonoBehaviour {
 		remainingDepth--;
 		Tile nextEdge = GetRandomEdge (section);
 
-		if(nextEdge != null)
+		if (nextEdge != null) {
+			PotentialSpawnPoints.Add (nextEdge.Position);
 			GenerateRandomDungeon (nextEdge.Position, remainingDepth);
+		}
 	}
 
 	// Picks an edge at random, returns null if none found

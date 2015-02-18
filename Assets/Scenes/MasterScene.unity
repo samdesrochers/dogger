@@ -388,7 +388,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4488d306259bf4f49bd1c44953c99223, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Player: {fileID: 0}
 --- !u!1 &442479132
 GameObject:
   m_ObjectHideFlags: 0
@@ -1435,7 +1434,7 @@ GameObject:
   - 114: {fileID: 2066184425}
   m_Layer: 0
   m_Name: Dungeon
-  m_TagString: Untagged
+  m_TagString: Map
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1466,6 +1465,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8487afb84cdf643219f11b9c81d8d790, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PotentialSpawnPoints: []
   InitialPosition: {x: 0, y: 0}
   DesiredSize: 80
 --- !u!1 &2075776894

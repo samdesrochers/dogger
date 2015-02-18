@@ -4,28 +4,33 @@ using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour {
 
-	public GameObject Player;
+	public GameObject Player { get; private set; }
 	
-	private List<GameObject> enemies;
+	public List<GameObject> Enemies { get; private set; }
 
 	private UnitHealth playerHp;
 
 	void Start () {
-		//Instanciate the player - to do
-		this.Player = (GameObject)Instantiate(Resources.Load("Prefabs/Player"), new Vector3(2,0,0), new Quaternion(0, 0, 0, 0));
+				
+		var map = GameObject.FindWithTag ("Map");
+		MapBuilder mapBuilder = map.GetComponent<MapBuilder> ();
+		Vector2 spawn = mapBuilder.GetRandomSpawnPoint ();
 
-		playerHp = Player.GetComponent<UnitHealth> ();
+		//Instanciate the player - to do
+		this.Player = (GameObject)Instantiate(Resources.Load("Prefabs/Player"), new Vector3(spawn.x, spawn.y, 0), new Quaternion(0, 0, 0, 0));
+		this.playerHp = Player.GetComponent<UnitHealth> ();
 
 		//Create the ennemies - to do keyvohn, generate from the map tile
-		enemies = new List<GameObject>();
-		for (int i=0; i < 4; ++i)
+		this.Enemies = new List<GameObject>();
+		for (int i = 0; i < 300; i++)
 		{
-			enemies.Add ((GameObject)Instantiate(Resources.Load("Prefabs/viciousCat"), new Vector3(2,0,0), Quaternion.identity));
+			spawn = mapBuilder.GetRandomSpawnPoint ();
+			Enemies.Add ((GameObject)Instantiate(Resources.Load("Prefabs/viciousCat"), new Vector3(spawn.x, spawn.y, 0), Quaternion.identity));
 		}
 	}
 	
 	void Update () {
-		Destroy (null);
+
 	}
 
 	Dictionary<string, string> GetPlayerKvp ()
