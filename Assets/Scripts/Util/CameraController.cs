@@ -14,10 +14,6 @@ public class CameraController : MonoBehaviour {
 	void Update () {
 	
 		// Adjust camera on player's position
-//		Camera.main.transform.position = new Vector3(playerRef.position.x, 
-//		                                             playerRef.position.y, 
-//		                                             Camera.main.transform.position.z);
-
 		if (target)
 		{
 			Vector3 point = camera.WorldToViewportPoint(target.position);

@@ -26,7 +26,7 @@ public class ProjectileDefaultController : MonoBehaviour {
 			// Blood splash
 			float tireAngle = Mathf.Rad2Deg*Mathf.Atan2(-direction.y,direction.x);
 
-			GameObject e = (GameObject)Instantiate(Resources.Load("Prefabs/Projectiles/bloodSplash"), coll.gameObject.transform.position, Quaternion.Euler(tireAngle,90,0)); 
+			GameObject e = (GameObject)Instantiate(Resources.Load("Prefabs/Projectiles/bloodSplash"), coll.transform.position, Quaternion.Euler(tireAngle,90,0)); 
 			ParticleSystem spashParticleSystem = e.GetComponent<ParticleSystem>();
 			spashParticleSystem.gameObject.SetActive(true);
 			spashParticleSystem.enableEmission = true;
