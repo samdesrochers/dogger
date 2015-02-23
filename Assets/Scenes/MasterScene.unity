@@ -359,7 +359,7 @@ GameObject:
   - 114: {fileID: 393493084}
   m_Layer: 0
   m_Name: GameManager
-  m_TagString: Untagged
+  m_TagString: GameManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -519,7 +519,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 499410, guid: e04b3b877fad84a258d552384f4cd0be, type: 2}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 11499414, guid: e04b3b877fad84a258d552384f4cd0be, type: 2}
       propertyPath: GameManager

@@ -80,4 +80,15 @@ public class PlayerController : MonoBehaviour
 	{
 		return new Vector2(transform.position.x, transform.position.y);
 	}
+
+	void OnCollisionEnter2D(Collision2D coll)
+	{
+		//Verify collision with the ennemies
+		//To do keyvohn, faire que ça pogne le type de unit
+		if (coll.gameObject.tag == "enemy") {
+			this.gameObject.GetComponent<UnitHealth>().TakeDamage(10);
+			Debug.Log ("Dat collision");
+//			coll.gameObject.SendMessage("TakeDamage", 10, SendMessageOptions.DontRequireReceiver);
+		}
+	}
 }

@@ -5,7 +5,7 @@ using System.Collections;
 public class UIManager : MonoBehaviour
 {
 	public GameManager GameManager;
-
+	
 	// Hero Attributes
 	public Text[] PlayerStats;
 	public Text[] Debug;
@@ -19,7 +19,6 @@ public class UIManager : MonoBehaviour
 	
 	private void Initialize()
 	{
-
 	}
 	
 	void Update()
@@ -28,6 +27,11 @@ public class UIManager : MonoBehaviour
 
 		PlayerStats [0].text = ui.HealthCurrent + "/" + ui.HealthTotal;
 		Debug [0].text = ui.posX + ", " + ui.posY;
+
+	}
+
+	public void showStageWonCanvas()
+	{
 
 	}
 }

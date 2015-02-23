@@ -12,8 +12,8 @@ GameObject:
   - 50: {fileID: 5000000}
   - 58: {fileID: 5800000}
   - 114: {fileID: 11400000}
-  - 114: {fileID: 11431980}
   - 114: {fileID: 11431982}
+  - 114: {fileID: 11411850}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -128,7 +128,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   walkSpeed: 4
---- !u!114 &11431980
+--- !u!114 &11411850
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class GameManager : MonoBehaviour {
 
 	public GameObject Player;
-	
+
 	private List<GameObject> enemies;
 
 	private UnitHealth playerHp;
@@ -18,14 +18,36 @@ public class GameManager : MonoBehaviour {
 
 		//Create the ennemies - to do keyvohn, generate from the map tile
 		enemies = new List<GameObject>();
-		for (int i=0; i < 4; ++i)
+		for (int i=0; i < 2; ++i)
 		{
-			enemies.Add ((GameObject)Instantiate(Resources.Load("Prefabs/viciousCat"), new Vector3(2,0,0), Quaternion.identity));
+			GameObject enemyToAdd = (GameObject)Instantiate(Resources.Load("Prefabs/viciousCat"), new Vector3(2,0,0), Quaternion.identity);
+			enemies.Add (enemyToAdd);
 		}
 	}
-	
+
+	private void pause()
+	{
+		Time.timeScale = 0.0f;
+	}
+
+	// To do keyvohn - put this (as well as the stuff that is in start) in a unit manager
+	public void unitDied (GameObject unit)
+	{
+		if (unit.tag == "Player") {
+			this.pause();
+			return;
+		}
+
+		// Remove the enemy from the dict
+		enemies.Remove (unit);
+		Destroy (unit);
+
+		if (enemies.Count == 0) {
+			this.pause();
+		}
+	}
+
 	void Update () {
-		Destroy (null);
 	}
 
 	Dictionary<string, string> GetPlayerKvp ()
