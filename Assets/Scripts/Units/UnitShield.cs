@@ -50,6 +50,7 @@ public class UnitShield : MonoBehaviour
 		}
 	}
 
+	// Shield is done regenerating
 	private void Charged()
 	{
 		State = (int)States.Charged;
@@ -57,6 +58,7 @@ public class UnitShield : MonoBehaviour
 		CooldownValue = 0.0f;
 	}
 
+	// Shield is out
 	private void Depleted(float dt)
 	{
 		State = (int)States.OnCooldown;
@@ -69,7 +71,6 @@ public class UnitShield : MonoBehaviour
 		{
 			CooldownValue += dt;
 		}
-		Debug.Log(CooldownValue);
 
 		if (CooldownValue >= CooldownTarget) 
 		{
