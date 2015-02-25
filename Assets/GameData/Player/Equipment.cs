@@ -1,8 +1,8 @@
 ﻿using System.Collections;
 
 public class Equipment {
-	public BaseWeapon Weapon1;
-	public BaseWeapon Weapon2;
+	public BaseWeapon LeftGun;
+	public BaseWeapon RightGun;
 
 	private static Equipment instance;
 	public static Equipment Instance {

@@ -1,7 +1,7 @@
 using System;
 
 public class OneHandedWeapon : BaseWeapon {
-	public OneHandedWeapon(Handle handle, PowerModule powerModule, Propulsor primaryPropulsor) : base(handle, powerModule, primaryPropulsor) {
+	public OneHandedWeapon(Handle handle, PowerModule powerModule, Propulsor[] propulsors) : base(handle, powerModule, propulsors) {
 
 	}
 }
