@@ -7,6 +7,8 @@ public class EquipmentController : MonoBehaviour {
 
 	private WeaponType currentWeaponType;
 
+	public float SpriteScale = 0.2f;
+
 	// Use this for initialization
 	void Start () {
 		// Equip default weapons...
@@ -87,13 +89,38 @@ public class EquipmentController : MonoBehaviour {
 	}
 
 	private void DrawOneHandedWeapon(Transform weaponContainer, OneHandedWeapon weapon) {
-		// Draw the handle
-		GameObject handleObject = Instantiate(Resources.Load(weapon.Handle.SpriteFullPath)) as GameObject;
+		// Draw the Handle
+		GameObject handleObject = Instantiate(Resources.Load(weapon.Handle.PrefabFullPath)) as GameObject;
 		handleObject.name = "Handle";
+
 		Transform handleTransform = handleObject.GetComponent<Transform>();
+		SpriteRenderer handleRenderer = handleObject.GetComponent<SpriteRenderer>();
+
 		handleTransform.parent = weaponContainer;
-		handleTransform.localPosition = new Vector3(0f, 0f, 0f);
+		handleTransform.localScale = new Vector3(this.SpriteScale, this.SpriteScale, 1.0f);
+		float handleTranslateY = handleRenderer.bounds.size.y * -0.5f;
+		handleTransform.localPosition = new Vector3(handleTranslateY, 0f, 0f);
 		handleTransform.localRotation = Quaternion.Euler(0f, 0f, 90.0f);
+		handleRenderer.sortingLayerName = "WeaponsLayer";
+
+		// Draw the Power Module
+		GameObject powerModuleObject = Instantiate(Resources.Load(weapon.PowerModule.PrefabFullPath)) as GameObject;
+		powerModuleObject.name = "PowerModule";
+		
+		Transform powerModuleTransform = powerModuleObject.GetComponent<Transform>();
+		SpriteRenderer powerModuleRenderer = powerModuleObject.GetComponent<SpriteRenderer>();
+		
+		powerModuleTransform.parent = weaponContainer;
+		powerModuleTransform.localScale = new Vector3(this.SpriteScale, this.SpriteScale, 1.0f);
+		float powerModuleTranslateY = -handleRenderer.bounds.size.x - powerModuleRenderer.bounds.size.y * 0.5f;
+		powerModuleTransform.localPosition = new Vector3(powerModuleTranslateY, 0f, 0f);
+		powerModuleTransform.localRotation = Quaternion.Euler(0f, 0f, 90.0f);
+		handleRenderer.sortingLayerName = "WeaponsLayer";
+
+		// Draw the propulsors
+		for (int i = 0; i < weapon.Propulsors.Length; i++) {
+			
+		}
 	}
 
 	private void DrawTwoHandedWeapon(Transform weaponContainer, TwoHandedWeapon weapon) {

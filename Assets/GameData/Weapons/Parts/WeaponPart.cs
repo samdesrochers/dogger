@@ -4,7 +4,7 @@ public class WeaponPart {
 	protected readonly string spritePrefabFolderPath;
 	protected readonly string spritePrefabName;
 
-	public string SpriteFullPath {
+	public string PrefabFullPath {
 		get {
 			return this.spritePrefabFolderPath + this.spritePrefabName;
 		}
