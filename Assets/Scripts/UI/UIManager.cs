@@ -28,6 +28,7 @@ public class UIManager : MonoBehaviour
 
 		PlayerStats [0].text = ui.HealthCurrent + "/" + ui.HealthTotal;
 		Debug [0].text = ui.posX + ", " + ui.posY;
-
+		Debug [1].text = ui.ShieldCurrent;
+		Debug [2].text = ui.ShieldState;
 	}
 }

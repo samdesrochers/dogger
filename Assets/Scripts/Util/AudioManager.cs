@@ -51,7 +51,7 @@ public class AudioManager : MonoBehaviour {
 	{
 		SongSource.clip = SongClips[songIndex];
 		SongSource.Play();
-		
+
 		songIndex = (songIndex + 1) % SongClips.Length;
 	}
 	
