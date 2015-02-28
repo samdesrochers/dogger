@@ -5,11 +5,13 @@ public class UnitHealth : MonoBehaviour
 {
 	public float health = 100f;
 
+	private GameManager gameManager;
+
 	// To add keyvohn,
 	// private anim deathAnim;
 
-	void Update ()
-	{
+	void Start () {
+		this.gameManager = (GameManager)GameObject.Find ("GameManager").GetComponent<GameManager>();
 	}
 	
 	public void TakeDamage (float amount)
@@ -25,7 +27,7 @@ public class UnitHealth : MonoBehaviour
 
 	private void unitDied()
 	{
-		Destroy (this.gameObject);
-		//To do keyvohn, start die animation
+		//Tell the game manager that a unit died
+		this.gameManager.unitDied (this.gameObject);
 	}
 }

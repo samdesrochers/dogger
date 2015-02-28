@@ -12,11 +12,10 @@ GameObject:
   - 50: {fileID: 5000000}
   - 58: {fileID: 5800000}
   - 114: {fileID: 11400000}
-  - 114: {fileID: 11431980}
   - 114: {fileID: 11431982}
-  - 114: {fileID: 11456692}
+  - 114: {fileID: 11411850}
   m_Layer: 0
-  m_Name: player
+  m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -60,7 +59,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.16637707, y: -.0432807766, z: 0}
+  m_LocalPosition: {x: 2, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 431980}
@@ -129,7 +128,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   walkSpeed: 4
---- !u!114 &11431980
+--- !u!114 &11411850
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -153,22 +152,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minAimDistance: 1.39999998
---- !u!114 &11456692
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100000}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4df2d731300bb42ba95d730203c2a226, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ShieldCapacity: 100
-  ShieldValue: 0
-  CooldownCapacity: 4
-  CooldownValue: 0
-  RegenationRate: 2
 --- !u!212 &21200000
 SpriteRenderer:
   m_ObjectHideFlags: 1
