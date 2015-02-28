@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour {
 		this.playerShield = Player.GetComponent<UnitShield> ();
 
 		this.Enemies = new List<GameObject>();
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < 100; i++) {
 			spawn = mapBuilder.GetRandomSpawnPoint ();
 			Enemies.Add ((GameObject)Instantiate (Resources.Load ("Prefabs/viciousCat"), new Vector3 (spawn.x, spawn.y, 0), Quaternion.identity));
 		}
@@ -32,11 +32,18 @@ public class GameManager : MonoBehaviour {
 		Time.timeScale = 0.0f;
 	}
 
+	private void gameOver()
+	{
+		GameObject ui = GameObject.FindWithTag ("UI");
+		Animator anim = ui.GetComponent<Animator> ();
+		anim.SetTrigger ("GameOver");
+	}
+
 	// To do keyvohn - put this (as well as the stuff that is in start) in a unit manager
 	public void unitDied (GameObject unit)
 	{
 		if (unit.tag == "Player") {
-			this.pause();
+			this.gameOver();
 			return;
 		}
 
@@ -45,7 +52,8 @@ public class GameManager : MonoBehaviour {
 		Destroy (unit);
 
 		if (Enemies.Count == 0) {
-			this.pause();
+			this.pause ();
+			return;
 		}
 	}
 
