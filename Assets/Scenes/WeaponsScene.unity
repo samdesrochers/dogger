@@ -234,6 +234,7 @@ GameObject:
   - 114: {fileID: 938150117}
   - 50: {fileID: 938150118}
   - 114: {fileID: 938150120}
+  - 114: {fileID: 938150119}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -302,6 +303,18 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
+--- !u!114 &938150119
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 938150114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d00432d544f9eab42a61f3a2603e3c5d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MinimumAimDistance: 2
 --- !u!114 &938150120
 MonoBehaviour:
   m_ObjectHideFlags: 0

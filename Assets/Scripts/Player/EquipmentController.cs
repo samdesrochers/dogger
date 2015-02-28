@@ -11,11 +11,6 @@ public class EquipmentController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		// Select weapon type
-		// TODO
-
-		// Select weapon parts
-		// TODO
 	}
 
 	private Transform CreateGunContainer(WeaponPosition position) {
