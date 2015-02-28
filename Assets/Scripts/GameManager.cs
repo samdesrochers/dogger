@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour {
 	private UnitHealth playerHp;
 
 	void Start () {
-		//Instanciate the player - to do
+		//Instanciate the player
 		this.Player = (GameObject)Instantiate(Resources.Load("Prefabs/Player"), new Vector3(2,0,0), new Quaternion(0, 0, 0, 0));
 
 		playerHp = Player.GetComponent<UnitHealth> ();
