@@ -21,17 +21,9 @@ public class GameManager : MonoBehaviour {
 		this.playerShield = Player.GetComponent<UnitShield> ();
 
 		this.Enemies = new List<GameObject>();
-		for (int i = 0; i < 10; i++)
-		{
+		for (int i = 0; i < 10; i++) {
 			spawn = mapBuilder.GetRandomSpawnPoint ();
-			Enemies.Add ((GameObject)Instantiate(Resources.Load("Prefabs/viciousCat"), new Vector3(spawn.x, spawn.y, 0), Quaternion.identity));
-
-		//Create the ennemies - to do keyvohn, generate from the map tile
-		Enemies = new List<GameObject>();
-		for (int i=0; i < 2; ++i)
-		{
-			GameObject enemyToAdd = (GameObject)Instantiate(Resources.Load("Prefabs/viciousCat"), new Vector3(2,0,0), Quaternion.identity);
-			Enemies.Add (enemyToAdd);
+			Enemies.Add ((GameObject)Instantiate (Resources.Load ("Prefabs/viciousCat"), new Vector3 (spawn.x, spawn.y, 0), Quaternion.identity));
 		}
 	}
 

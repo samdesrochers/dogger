@@ -124,6 +124,7 @@ MonoBehaviour:
   Debug:
   - {fileID: 1435637435}
   - {fileID: 1932891906}
+  - {fileID: 1932891906}
 --- !u!1 &159364525
 GameObject:
   m_ObjectHideFlags: 0
@@ -488,6 +489,10 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 11499414, guid: e04b3b877fad84a258d552384f4cd0be, type: 2}
+      propertyPath: Debug.Array.size
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 499410, guid: e04b3b877fad84a258d552384f4cd0be, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -536,6 +541,10 @@ Prefab:
       propertyPath: m_AnchoredPosition.y
       value: -40
       objectReference: {fileID: 0}
+    - target: {fileID: 11499414, guid: e04b3b877fad84a258d552384f4cd0be, type: 2}
+      propertyPath: Debug.Array.data[2]
+      value: 
+      objectReference: {fileID: 1932891906}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e04b3b877fad84a258d552384f4cd0be, type: 2}
   m_RootGameObject: {fileID: 68981911}
