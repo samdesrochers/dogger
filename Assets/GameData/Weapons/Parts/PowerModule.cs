@@ -1,6 +1,14 @@
 ﻿using System.Collections;
 
 public class PowerModule : WeaponPart {
-	public PowerModule(string spritePrefabName) : base(spritePrefabName, "Prefabs/Weapons/Weapon Parts/Power Modules/") {
+	private int barrelSlots;
+	public int BarrelSlots {
+		get {
+			return this.barrelSlots;
+		}
+	}
+
+	public PowerModule(string spritePrefabName, int barrelSlots) : base(spritePrefabName, "Prefabs/Weapons/Weapon Parts/Power Modules/") {
+		this.barrelSlots = barrelSlots;
 	}
 }
