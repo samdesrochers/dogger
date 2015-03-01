@@ -16,14 +16,17 @@ public class GameManager : MonoBehaviour {
 		MapBuilder mapBuilder = map.GetComponent<MapBuilder> ();
 		Vector2 spawn = mapBuilder.GetRandomSpawnPoint ();
 
-		this.Player = (GameObject)Instantiate(Resources.Load("Prefabs/Player"), new Vector3(spawn.x, spawn.y, 0), new Quaternion(0, 0, 0, 0));
+		this.Player = (GameObject)Instantiate(Resources.Load("Prefabs/Player"), new Vector3(2, 2, 0), new Quaternion(0, 0, 0, 0));
 		this.playerHp = Player.GetComponent<UnitHealth> ();
 		this.playerShield = Player.GetComponent<UnitShield> ();
 
 		this.Enemies = new List<GameObject>();
-		for (int i = 0; i < 100; i++) {
+		for (int i = 0; i < 1; i++) {
 			spawn = mapBuilder.GetRandomSpawnPoint ();
-			Enemies.Add ((GameObject)Instantiate (Resources.Load ("Prefabs/viciousCat"), new Vector3 (spawn.x, spawn.y, 0), Quaternion.identity));
+			GameObject cat = (GameObject)Instantiate (Resources.Load ("Prefabs/viciousCat"), new Vector3 (0, 0, 0), Quaternion.identity);
+			EnemyAI catAi = cat.GetComponent<EnemyAI> ();
+			catAi.Player = this.Player;
+			Enemies.Add (cat);
 		}
 	}
 
