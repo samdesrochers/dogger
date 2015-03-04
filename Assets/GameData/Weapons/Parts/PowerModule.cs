@@ -8,7 +8,8 @@ public class PowerModule : WeaponPart {
 		}
 	}
 
-	public PowerModule(string spritePrefabName, int barrelSlots) : base(spritePrefabName, "Prefabs/Weapons/Weapon Parts/Power Modules/") {
+	public PowerModule(string spritePrefabName, Properties properties, int barrelSlots)
+	: base(spritePrefabName, "Prefabs/Weapons/Weapon Parts/Power Modules/", properties) {
 		this.barrelSlots = barrelSlots;
 	}
 }

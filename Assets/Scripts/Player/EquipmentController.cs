@@ -6,7 +6,7 @@ public class EquipmentController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		this.DrawWeapons();
+		this.AssembleWeapons();
 	}
 	
 	// Update is called once per frame
@@ -37,19 +37,19 @@ public class EquipmentController : MonoBehaviour {
 		return gunContainerTransform;
 	}
 
-	private void DrawWeapons() {
+	private void AssembleWeapons() {
 		Transform rightGunContainerTransform = this.CreateGunContainer(WeaponPosition.RIGHT);
 
 		if (Equipment.Instance.CurrentWeaponKit == WeaponKit.DUAL_WIELD) {
 			Transform leftGunContainerTransform = this.CreateGunContainer(WeaponPosition.LEFT);
-			this.DrawOneHandedWeapon(leftGunContainerTransform, Equipment.Instance.LeftGun as OneHandedWeapon);
-			this.DrawOneHandedWeapon(rightGunContainerTransform, Equipment.Instance.RightGun as OneHandedWeapon);
+			this.AssembleOneHandedWeapon(leftGunContainerTransform, Equipment.Instance.LeftGun as OneHandedWeapon);
+			this.AssembleOneHandedWeapon(rightGunContainerTransform, Equipment.Instance.RightGun as OneHandedWeapon);
 		} else {
-			this.DrawTwoHandedWeapon(rightGunContainerTransform, Equipment.Instance.RightGun as TwoHandedWeapon);
+			this.AssembleTwoHandedWeapon(rightGunContainerTransform, Equipment.Instance.RightGun as TwoHandedWeapon);
 		}
 	}
 
-	private void DrawOneHandedWeapon(Transform weaponContainer, OneHandedWeapon weapon) {
+	private void AssembleOneHandedWeapon(Transform weaponContainer, OneHandedWeapon weapon) {
 		// Draw the Handle
 		GameObject handleObject = Instantiate(Resources.Load(weapon.Handle.PrefabFullPath)) as GameObject;
 		handleObject.name = "Handle";
@@ -157,6 +157,6 @@ public class EquipmentController : MonoBehaviour {
 		}
 	}
 
-	private void DrawTwoHandedWeapon(Transform weaponContainer, TwoHandedWeapon weapon) {
+	private void AssembleTwoHandedWeapon(Transform weaponContainer, TwoHandedWeapon weapon) {
 	}
 }

@@ -10,9 +10,12 @@ public class WeaponPart {
 		}
 	}
 
-	public WeaponPart (string spritePrefabName, string spritePrefabFolderPath)
+	public Properties Properties;
+
+	public WeaponPart(string spritePrefabName, string spritePrefabFolderPath, Properties properties)
 	{
 		this.spritePrefabName = spritePrefabName;
 		this.spritePrefabFolderPath = spritePrefabFolderPath;
+		this.Properties = properties;
 	}
 }

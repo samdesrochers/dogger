@@ -30,19 +30,20 @@ public class Propulsor {
 		}
 	}
 
-
-	private float shotsPerSecond;
-	private float projectileVelocity;
-	private float cooldown;
-
-	private bool isAuto {
+	private Properties properties;
+	public Properties Properties {
 		get {
-			return this.shotsPerSecond == 0.0f;
+			return this.properties;
 		}
 	}
 
-	private float lastFired;
-	private bool isTriggerDown;
+	private bool isAuto {
+		get {
+			return this.properties.ShotsPerSecond != 0.0f;
+		}
+	}
+	
+	private float nextFireTime;
 
 	public Propulsor(Barrel barrel, Magazine magazine, Extension extension, Accessory accessory) {
 		this.barrel = barrel;
@@ -50,28 +51,15 @@ public class Propulsor {
 		this.extension = extension;
 		this.accessory = accessory;
 
-		this.shotsPerSecond = 0.0f; // TEMP
-		this.projectileVelocity = 10.0f; // TEMP
-
-		if (!this.isAuto) {
-			this.cooldown = 1.0f / this.shotsPerSecond;
-		} else {
-			this.cooldown = 0.0f;	
-		}
-
-		this.lastFired = 0.0f;
-		this.isTriggerDown = false;
+		this.properties = null; // TEMP
+		this.nextFireTime = 0f;
 	}
 
-	public bool CanFire() {
+	public bool CanFire(bool isTriggerAlreadyDown) {
 		if (this.isAuto) {
-			return Time.time > this.lastFired + this.cooldown;
+			return Time.time > this.nextFireTime;
 		} else {
-			return !this.isTriggerDown;
+			return !isTriggerAlreadyDown;
 		}
-	}
-
-	public void ReleaseTrigger() {
-		this.isTriggerDown = false;
 	}
 }
