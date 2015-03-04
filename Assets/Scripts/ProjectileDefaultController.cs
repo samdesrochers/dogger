@@ -12,7 +12,7 @@ public class ProjectileDefaultController : MonoBehaviour {
 	void Start () {
 		Destroy(this.gameObject, this.TimeToLive);
 		
-		direction = this.rigidbody2D.velocity;	
+		direction = this.GetComponent<Rigidbody2D>().velocity;	
 	}
 	
 	// Update is called once per frame
