@@ -2,7 +2,8 @@
 using System.Collections;
 
 public class EquipmentController : MonoBehaviour {
-	private float SpriteScale = 0.25f;
+	public const float WeaponPartsScale = 0.25f;
+	public const float ProjectilesScale = 0.25f;
 
 	// Use this for initialization
 	void Start () {
@@ -58,7 +59,7 @@ public class EquipmentController : MonoBehaviour {
 		SpriteRenderer handleRenderer = handleObject.GetComponent<SpriteRenderer>();
 
 		handleTransform.parent = weaponContainer;
-		handleTransform.localScale = new Vector3(this.SpriteScale, this.SpriteScale, 1f);
+		handleTransform.localScale = new Vector3(WeaponPartsScale, WeaponPartsScale, 1f);
 		float handleTranslateX = handleRenderer.bounds.size.y * -0.5f;
 		handleTransform.localPosition = new Vector3(handleTranslateX, 0f, 0f);
 		handleTransform.localRotation = Quaternion.Euler(0f, 0f, 90f);
@@ -72,7 +73,7 @@ public class EquipmentController : MonoBehaviour {
 		SpriteRenderer powerModuleRenderer = powerModuleObject.GetComponent<SpriteRenderer>();
 		
 		powerModuleTransform.parent = weaponContainer;
-		powerModuleTransform.localScale = new Vector3(this.SpriteScale, this.SpriteScale, 1f);
+		powerModuleTransform.localScale = new Vector3(WeaponPartsScale, WeaponPartsScale, 1f);
 		float powerModuleTranslateX = -handleRenderer.bounds.size.x - powerModuleRenderer.bounds.size.y * 0.5f;
 		powerModuleTransform.localPosition = new Vector3(powerModuleTranslateX, 0f, 0f);
 		powerModuleTransform.localRotation = Quaternion.Euler(0f, 0f, 90f);
@@ -100,11 +101,13 @@ public class EquipmentController : MonoBehaviour {
 			SpriteRenderer barrelRenderer = barrelObject.GetComponent<SpriteRenderer>();
 			
 			barrelTransform.parent = propulsorContainerTransform;
-			barrelTransform.localScale = new Vector3(this.SpriteScale, this.SpriteScale, 1f);
+			barrelTransform.localScale = new Vector3(WeaponPartsScale, WeaponPartsScale, 1f);
 			float barrelTranslateX = -barrelRenderer.bounds.size.y * 0.5f;
 			barrelTransform.localPosition = new Vector3(barrelTranslateX, 0f, 0f);
 			barrelTransform.localRotation = Quaternion.Euler(0f, 0f, 90f);
 			barrelRenderer.sortingLayerName = "WeaponsLayer";
+
+			float projectileEmitterTranslateX = -barrelRenderer.bounds.size.x * 0.8f;;
 
 			// Draw the Magazine
 			GameObject magazineObject = Instantiate(Resources.Load(propulsorToDraw.Magazine.PrefabFullPath)) as GameObject;
@@ -114,7 +117,7 @@ public class EquipmentController : MonoBehaviour {
 			SpriteRenderer magazineRenderer = magazineObject.GetComponent<SpriteRenderer>();
 			
 			magazineTransform.parent = propulsorContainerTransform;
-			magazineTransform.localScale = new Vector3(this.SpriteScale, this.SpriteScale, 1f);
+			magazineTransform.localScale = new Vector3(WeaponPartsScale, WeaponPartsScale, 1f);
 			float magazineTranslateX = -magazineRenderer.bounds.size.y * 0.5f;
 			magazineTransform.localPosition = new Vector3(magazineTranslateX, 0f, 0f);
 			magazineTransform.localRotation = Quaternion.Euler(0f, 0f, 90f);
@@ -130,15 +133,16 @@ public class EquipmentController : MonoBehaviour {
 				SpriteRenderer extensionRenderer = extensionObject.GetComponent<SpriteRenderer>();
 				
 				extensionTransform.parent = propulsorContainerTransform;
-				extensionTransform.localScale = new Vector3(this.SpriteScale, this.SpriteScale, 1f);
+				extensionTransform.localScale = new Vector3(WeaponPartsScale, WeaponPartsScale, 1f);
 				float extensionTranslateX = -barrelRenderer.bounds.size.x - extensionRenderer.bounds.size.y * 0.5f;
 				extensionTransform.localPosition = new Vector3(extensionTranslateX, 0f, 0f);
 				extensionTransform.localRotation = Quaternion.Euler(0f, 0f, 90f);
 				extensionRenderer.sortingLayerName = "WeaponsLayer";
-				extensionRenderer.sortingOrder = 1;
+
+				projectileEmitterTranslateX = -barrelRenderer.bounds.size.x - extensionRenderer.bounds.size.y * 0.8f;
 			}
 
-			// Draw the Extension
+			// Draw the Accessory
 			if(propulsorToDraw.Accessory != null) {
 				GameObject accessoryObject = Instantiate(Resources.Load(propulsorToDraw.Accessory.PrefabFullPath)) as GameObject;
 				accessoryObject.name = "Accessory";
@@ -147,13 +151,22 @@ public class EquipmentController : MonoBehaviour {
 				SpriteRenderer accessoryRenderer = accessoryObject.GetComponent<SpriteRenderer>();
 				
 				accessoryTransform.parent = propulsorContainerTransform;
-				accessoryTransform.localScale = new Vector3(this.SpriteScale, this.SpriteScale, 1f);
-				float accessoryTranslateX = -(barrelRenderer.bounds.size.x * 0.75f);
+				accessoryTransform.localScale = new Vector3(WeaponPartsScale, WeaponPartsScale, 1f);
+				float accessoryTranslateX = -barrelRenderer.bounds.size.x * 0.75f;
 				accessoryTransform.localPosition = new Vector3(accessoryTranslateX, 0f, 0f);
 				accessoryTransform.localRotation = Quaternion.Euler(0f, 0f, 90f);
 				accessoryRenderer.sortingLayerName = "WeaponsLayer";
 				accessoryRenderer.sortingOrder = 1;
 			}
+
+			// Create the projectile emitter
+			string emitterPrefab = ProjectileEmitterContainer.GetPrefabPath(propulsorToDraw);
+			GameObject emitterObject = Instantiate(Resources.Load(emitterPrefab)) as GameObject;
+			emitterObject.name = "ProjectileEmitter";
+
+			Transform emitterTransform = emitterObject.GetComponent<Transform>();
+			emitterTransform.parent = propulsorContainerTransform;
+			emitterTransform.localPosition = new Vector3(projectileEmitterTranslateX, 0f, 0f);
 		}
 	}
 

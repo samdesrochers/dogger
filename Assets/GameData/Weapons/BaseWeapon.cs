@@ -8,9 +8,15 @@ public class BaseWeapon {
 		}
 	}
 
-	private Propulsor currentPropulsor {
+	public Propulsor ActivePropulsor {
 		get {
 			return this.propulsors[this.fireMode];
+		}
+	}
+
+	public string ActivePropulsorGameObjectName {
+		get {
+			return "Propulsor" + this.fireMode;
 		}
 	}
 
@@ -44,24 +50,27 @@ public class BaseWeapon {
 		this.powerModule = powerModule;
 		this.propulsors = propulsors;
 		this.isTriggerDown = false;
+
+		this.CombineProperties();
 	}
 
-	public virtual bool CanFire() {
-		return this.currentPropulsor.CanFire(this.isTriggerDown);
+	private void CombineProperties(){
+		Properties aggregatedProperties = this.handle.Properties + this.powerModule.Properties;
+		foreach (Propulsor p in this.propulsors) {
+			p.InitializeProperties(aggregatedProperties);
+		}
 	}
 
-	public virtual void ReleaseTrigger() {
+	public bool CanFire() {
+		return this.ActivePropulsor.CanFire(this.isTriggerDown);
+	}
+
+	public void TriggerReleased() {
 		this.isTriggerDown = false;
 	}
 
-	/*public void Fire(Transform weaponTransform, Vector3 target) {
-		Vector3 direction = weaponTransform.rotation * Vector3.left;
-		Vector2 force = direction * this.projectileForce;
-		
-		GameObject bulletInstance = (GameObject)MonoBehaviour.Instantiate(this.projectilePrefab, weaponTransform.position, weaponTransform.rotation);
-		bulletInstance.GetComponent<Rigidbody2D>().AddForce(force, ForceMode2D.Impulse);
-		bulletInstance.GetComponent<SpriteRenderer>().sortingLayerName = "ProjectilesLayer";
-		this.lastFired = Time.time;
+	public void WeaponFired() {
 		this.isTriggerDown = true;
-	}*/
+		this.ActivePropulsor.WeaponFired();
+	}
 }

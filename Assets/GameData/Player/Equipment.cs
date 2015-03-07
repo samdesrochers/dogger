@@ -40,12 +40,12 @@ public class Equipment {
 		PowerModule leftPowerModule = new PowerModule("default", new Properties(), 2);
 		Propulsor[] leftPropulsors = new Propulsor[]
 		{
-			new Propulsor(new Barrel("default", new Properties()),
-			              new Magazine("default", new Properties()),
+			new Propulsor(new Barrel("default", BarrelType.PISTOL, new Properties(baseVelocity: 10f)),
+			              new Magazine("default", MagazineType.METAL, new Properties()),
 			              new Extension("default", new Properties()), 
 			              new Accessory("default", new Properties())),
-			new Propulsor(new Barrel("default", new Properties()),
-			              new Magazine("default", new Properties()),
+			new Propulsor(new Barrel("default", BarrelType.PISTOL, new Properties(baseVelocity: 10f)),
+			              new Magazine("default", MagazineType.METAL, new Properties()),
 			              new Extension("default", new Properties()), 
 			              new Accessory("default", new Properties()))
 		};
@@ -56,12 +56,12 @@ public class Equipment {
 		PowerModule rightPowerModule = new PowerModule("default", new Properties(), 2);
 		Propulsor[] rightPropulsors = new Propulsor[]
 		{
-			new Propulsor(new Barrel("default", new Properties()),
-			              new Magazine("default", new Properties()),
+			new Propulsor(new Barrel("default", BarrelType.PISTOL, new Properties(baseVelocity: 10f)),
+			              new Magazine("default", MagazineType.METAL, new Properties()),
 			              new Extension("default", new Properties()), 
 			              new Accessory("default", new Properties())),
-			new Propulsor(new Barrel("default", new Properties()),
-			              new Magazine("default", new Properties()),
+			new Propulsor(new Barrel("default", BarrelType.PISTOL, new Properties(baseVelocity: 10f)),
+			              new Magazine("default", MagazineType.METAL, new Properties()),
 			              new Extension("default", new Properties()), 
 			              new Accessory("default", new Properties()))
 		};

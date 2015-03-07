@@ -51,7 +51,7 @@ public class Propulsor {
 		this.extension = extension;
 		this.accessory = accessory;
 
-		this.properties = null; // TEMP
+		this.properties = null;
 		this.nextFireTime = 0f;
 	}
 
@@ -61,5 +61,23 @@ public class Propulsor {
 		} else {
 			return !isTriggerAlreadyDown;
 		}
+	}
+
+	public void WeaponFired() {
+		this.nextFireTime = Time.time + (1f / this.properties.ShotsPerSecond);
+	}
+
+	public void InitializeProperties(Properties aggregatedProperties) {
+		aggregatedProperties += this.magazine.Properties + this.barrel.Properties;
+
+		if (this.extension != null) {
+			aggregatedProperties += this.extension.Properties;
+		}
+
+		if (this.accessory != null) {
+			aggregatedProperties += this.accessory.Properties;
+		}
+
+		this.properties = aggregatedProperties;
 	}
 }
