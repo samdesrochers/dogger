@@ -40,7 +40,7 @@ public class Equipment {
 		PowerModule leftPowerModule = new PowerModule("default", new Properties(), 2);
 		Propulsor[] leftPropulsors = new Propulsor[]
 		{
-			new Propulsor(new Barrel("default", BarrelType.PISTOL, new Properties(baseVelocity: 10f)),
+			new Propulsor(new Barrel("default", BarrelType.MACHINE_GUN, new Properties(baseVelocity: 15f, baseShotsPerSecond: 8f)),
 			              new Magazine("default", MagazineType.METAL, new Properties()),
 			              new Extension("default", new Properties()), 
 			              new Accessory("default", new Properties())),
@@ -60,7 +60,7 @@ public class Equipment {
 			              new Magazine("default", MagazineType.METAL, new Properties()),
 			              new Extension("default", new Properties()), 
 			              new Accessory("default", new Properties())),
-			new Propulsor(new Barrel("default", BarrelType.PISTOL, new Properties(baseVelocity: 10f)),
+			new Propulsor(new Barrel("default", BarrelType.MACHINE_GUN, new Properties(baseVelocity: 10f, baseShotsPerSecond: 4f)),
 			              new Magazine("default", MagazineType.METAL, new Properties()),
 			              new Extension("default", new Properties()), 
 			              new Accessory("default", new Properties()))

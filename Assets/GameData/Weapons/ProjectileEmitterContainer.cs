@@ -35,6 +35,10 @@ public class ProjectileEmitterContainer {
 		emitterPrefabs[(int)BarrelType.PISTOL, (int)MagazineType.METAL] = pistolEmitterRootPath + "MetalPistol";
 
 		// Machine Gun emitters
+		string machineGunEmitterRootPath = "Prefabs/Weapons/Projectile Emitters/Machine Gun/";
+		
+		emitterPrefabs[(int)BarrelType.MACHINE_GUN, (int)MagazineType.METAL] = machineGunEmitterRootPath + "MetalMachineGun";
+
 		// Shotgun emitters
 		// Rail Gun emitters
 		// Grenade Launcher emitters
@@ -47,6 +51,8 @@ public class ProjectileEmitterContainer {
 		emitterControllers[(int)BarrelType.PISTOL, (int)MagazineType.METAL] = typeof(MetalPistolEmitterController);
 		
 		// Machine Gun controllers
+		emitterControllers[(int)BarrelType.MACHINE_GUN, (int)MagazineType.METAL] = typeof(MetalMachineGunEmitterController);
+
 		// Shotgun controllers
 		// Rail Gun controllers
 		// Grenade Launcher controllers

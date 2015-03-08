@@ -73,4 +73,22 @@ public class BaseWeapon {
 		this.isTriggerDown = true;
 		this.ActivePropulsor.WeaponFired();
 	}
+
+	public void SwitchFireMode(bool isPositiveDirection = true) {
+		int increment = isPositiveDirection ? 1 : -1;
+		int mode = this.fireMode + increment;
+
+		if (mode < 0) {
+			mode += this.propulsors.Length;
+		}
+
+		mode %= this.propulsors.Length;
+		this.fireMode = mode;
+	}
+
+	public void SwitchFireMode(int mode) {
+		if (mode < this.propulsors.Length) {
+			this.fireMode = mode;
+		}
+	}
 }

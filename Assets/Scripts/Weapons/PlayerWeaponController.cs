@@ -29,7 +29,7 @@ public class PlayerWeaponController : MonoBehaviour {
 		}
 
 		// Fire weapons
-		if (Input.GetButton("Fire1")) {
+		if (Input.GetMouseButton(0)) {
 			BaseWeapon weapon = Equipment.Instance.RightGun;
 
 			if (weapon.CanFire()) {
@@ -42,11 +42,23 @@ public class PlayerWeaponController : MonoBehaviour {
 			}
 		}
 
-		// TODO Right mouse button
+		if (Input.GetMouseButton(1)) {
+			BaseWeapon weapon = Equipment.Instance.LeftGun;
+			
+			if (weapon != null && weapon.CanFire()) {
+				// Register weapon fired
+				weapon.WeaponFired();
+				
+				// Start the projectile emitter
+				IProjectileEmitterController emitterController = this.FindEmitterController("Left", weapon);
+				emitterController.StartEmitting(weapon.ActivePropulsor.Properties);
+			}
+		}
 
 		// Release triggers
-		if (Input.GetButtonUp ("Fire1")) {
+		if (Input.GetMouseButtonUp(0)) {
 			BaseWeapon weapon = Equipment.Instance.RightGun;
+
 			// Mark trigger as released
 			weapon.TriggerReleased();
 
@@ -55,39 +67,39 @@ public class PlayerWeaponController : MonoBehaviour {
 			emitterController.StopEmitting();
 		}
 
-		// TODO Right mouse button
+		if (Input.GetMouseButtonUp(1)) {
+			BaseWeapon weapon = Equipment.Instance.LeftGun;
 
-		// Fire main weapon
-		/*if (Input.GetButton("Fire1")) {
-			OldWeapon weapon = this.weapons[this.currentWeapon];
-			if (weapon.CanFire()) {
-				weapon.Fire(leftGun, mouseTarget);
-			}
-		}
-		
-		// Release trigger
-		if (Input.GetButtonUp ("Fire1")) {
-			foreach(OldWeapon w in this.weapons) {
-				w.ReleaseTrigger();
-			}
+			// Mark trigger as released
+			weapon.TriggerReleased();
+			
+			// Stop the projectile emitter
+			IProjectileEmitterController emitterController = this.FindEmitterController("Left", weapon);
+			emitterController.StopEmitting();
 		}
 		
 		// Change weapon
-		if (Input.GetKey(KeyCode.Alpha1)) {
-			this.currentWeapon = 0;
+		int newFireMode = -1;
+
+		if (Input.GetKeyDown(KeyCode.Alpha1)) {
+			newFireMode = 0;
+		} else if (Input.GetKeyDown(KeyCode.Alpha2)) {
+			newFireMode = 1;
+		} else if (Input.GetKeyDown(KeyCode.Alpha3)) {
+			newFireMode = 2;
+		} else if (Input.GetKeyDown(KeyCode.Alpha4)) {
+			newFireMode = 3;
 		}
-		
-		if (Input.GetKey(KeyCode.Alpha2)) {
-			this.currentWeapon = 1;
+
+		if (newFireMode != -1) {
+			if(Equipment.Instance.CurrentWeaponKit == WeaponKit.TWO_HANDED && newFireMode <= 2) {
+				Equipment.Instance.RightGun.SwitchFireMode(newFireMode);
+			} else if (newFireMode <= 1) {
+				Equipment.Instance.RightGun.SwitchFireMode(newFireMode);
+			} else {
+				Equipment.Instance.LeftGun.SwitchFireMode(newFireMode - 2);
+			}
 		}
-		
-		if (Input.GetKey(KeyCode.Alpha3)) {
-			this.currentWeapon = 2;
-		}
-		
-		if (Input.GetKey(KeyCode.Alpha4)) {
-			this.currentWeapon = 3;
-		}*/
 	}
 
 	private void PointWeaponTowardsMouse(Transform weaponContainerTransform, Vector3 mouseTarget) {
@@ -104,7 +116,7 @@ public class PlayerWeaponController : MonoBehaviour {
 		string propulsorKey = propulsorKeyPrefix + propulsorName;
 
 		if (!this.emitterControllers.ContainsKey(propulsorKey)) {
-			string emitterrObjectPath = string.Format("RightGun/{0}/ProjectileEmitter", propulsorName);
+			string emitterrObjectPath = string.Format("{0}Gun/{1}/ProjectileEmitter", propulsorKeyPrefix, propulsorName);
 			Transform emitterTransform = this.transform.FindChild(emitterrObjectPath);
 			Type emitterControllerClass = ProjectileEmitterContainer.GetControllerClass(weapon.ActivePropulsor);
 			

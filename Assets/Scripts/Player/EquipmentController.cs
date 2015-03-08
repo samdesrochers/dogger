@@ -3,7 +3,7 @@ using System.Collections;
 
 public class EquipmentController : MonoBehaviour {
 	public const float WeaponPartsScale = 0.25f;
-	public const float ProjectilesScale = 0.25f;
+	public const float ProjectilesScale = 0.45f;
 
 	// Use this for initialization
 	void Start () {
