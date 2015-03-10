@@ -33,8 +33,12 @@ public class EquipmentController : MonoBehaviour {
 
 		GameObject gunContainerObject = Instantiate(Resources.Load(prefabPath)) as GameObject;
 		gunContainerObject.name = objectName;
+
 		Transform gunContainerTransform = gunContainerObject.GetComponent<Transform>();
+		Vector3 localPosition = gunContainerTransform.position;
 		gunContainerTransform.parent = this.GetComponent<Transform>();
+		gunContainerTransform.localPosition = localPosition;
+
 		return gunContainerTransform;
 	}
 
