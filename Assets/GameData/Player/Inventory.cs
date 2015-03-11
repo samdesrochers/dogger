@@ -1,37 +1,55 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 
 public class Inventory {
-	public List<Handle> Handles;
-	public List<PowerModule> PowerModules;
-	public List<Barrel> Barrels;
-	public List<Magazine> Magazines;
-	public List<Extension> Extensions;
-	public List<Accessory> Accessories;
+	private List<Handle> handles;
+	private List<PowerModule> powerModules;
+	private List<Barrel> barrels;
+	private List<Magazine> magazines;
+	private List<Extension> extensions;
+	private List<Accessory> accessories;
 
-	private static Inventory instance;
-	public static Inventory Instance {
-		get {
-			if (instance == null) {
-				instance = new Inventory();
-				instance.InitializeData();
-			}
-
-			return instance;
-		}
+	public Inventory() {
+		this.handles = new List<Handle>();
+		this.powerModules = new List<PowerModule>();
+		this.barrels = new List<Barrel>();
+		this.magazines = new List<Magazine>();
+		this.extensions = new List<Extension>();
+		this.accessories = new List<Accessory>();
 	}
 
-	private Inventory() {
-		this.Handles = new List<Handle>();
-		this.PowerModules = new List<PowerModule>();
-		this.Barrels = new List<Barrel>();
-		this.Magazines = new List<Magazine>();
-		this.Extensions = new List<Extension>();
-		this.Accessories = new List<Accessory>();
+//	public void AddWeaponPart(WeaponPart part) {
+//		Type partType = part.GetType();
+//
+//		switch(partType) {
+//		case typeof(Handle):
+//			this.AddWeaponPartInternal(part as Handle);
+//			break;
+//		}
+//	}
+
+	public void AddWeaponPart(Handle handle) {
+		this.handles.Add(handle);
 	}
 
-	private void InitializeData() {
-		// Fill up inventory with various parts
-		// TODO
+	public void AddWeaponPart(PowerModule powerModule) {
+		this.powerModules.Add(powerModule);
+	}
+
+	public void AddWeaponPart(Barrel barrel) {
+		this.barrels.Add(barrel);
+	}
+
+	public void AddWeaponPart(Magazine magazine) {
+		this.magazines.Add(magazine);
+	}
+
+	public void AddWeaponPart(Extension extension) {
+		this.extensions.Add(extension);
+	}
+
+	public void AddWeaponPart(Accessory accessory) {
+		this.accessories.Add(accessory);
 	}
 }

@@ -22,7 +22,7 @@ public class EquipmentController : MonoBehaviour {
 			prefabPath += "LeftGunContainer";
 			objectName = "LeftGun";
 		} else {
-			if (Equipment.Instance.CurrentWeaponKit == WeaponKit.DUAL_WIELD) {
+			if (PlaythroughManager.Instance.PlayerInfo.Equipment.CurrentWeaponKit == WeaponKit.DUAL_WIELD) {
 				prefabPath += "RightGunContainer";
 				objectName = "RightGun";
 			} else {
@@ -43,14 +43,15 @@ public class EquipmentController : MonoBehaviour {
 	}
 
 	private void AssembleWeapons() {
+		Equipment playerEquipment = PlaythroughManager.Instance.PlayerInfo.Equipment;
 		Transform rightGunContainerTransform = this.CreateGunContainer(WeaponPosition.RIGHT);
 
-		if (Equipment.Instance.CurrentWeaponKit == WeaponKit.DUAL_WIELD) {
+		if (playerEquipment.CurrentWeaponKit == WeaponKit.DUAL_WIELD) {
 			Transform leftGunContainerTransform = this.CreateGunContainer(WeaponPosition.LEFT);
-			this.AssembleOneHandedWeapon(leftGunContainerTransform, Equipment.Instance.LeftGun as OneHandedWeapon);
-			this.AssembleOneHandedWeapon(rightGunContainerTransform, Equipment.Instance.RightGun as OneHandedWeapon);
+			this.AssembleOneHandedWeapon(leftGunContainerTransform, playerEquipment.LeftGun as OneHandedWeapon);
+			this.AssembleOneHandedWeapon(rightGunContainerTransform, playerEquipment.RightGun as OneHandedWeapon);
 		} else {
-			this.AssembleTwoHandedWeapon(rightGunContainerTransform, Equipment.Instance.RightGun as TwoHandedWeapon);
+			this.AssembleTwoHandedWeapon(rightGunContainerTransform, playerEquipment.RightGun as TwoHandedWeapon);
 		}
 	}
 

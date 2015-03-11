@@ -15,13 +15,15 @@ public class PlayerWeaponController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		Equipment playerEquipment = PlaythroughManager.Instance.PlayerInfo.Equipment;
+
 		Vector3 mouseTarget = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 		mouseTarget.z = 0f;
 
 		// Orient weapons towards cursor
 		float aimDistance = Vector3.Distance(this.transform.position, mouseTarget);
 		if (aimDistance > this.MinimumAimDistance) {
-			if (Equipment.Instance.CurrentWeaponKit == WeaponKit.DUAL_WIELD) {
+			if (playerEquipment.CurrentWeaponKit == WeaponKit.DUAL_WIELD) {
 				this.PointWeaponTowardsMouse(this.transform.FindChild("LeftGun"), mouseTarget);
 			}
 
@@ -30,7 +32,7 @@ public class PlayerWeaponController : MonoBehaviour {
 
 		// Fire weapons
 		if (Input.GetMouseButton(0)) {
-			BaseWeapon weapon = Equipment.Instance.RightGun;
+			BaseWeapon weapon = playerEquipment.RightGun;
 
 			if (weapon.CanFire()) {
 				// Register weapon fired
@@ -43,7 +45,7 @@ public class PlayerWeaponController : MonoBehaviour {
 		}
 
 		if (Input.GetMouseButton(1)) {
-			BaseWeapon weapon = Equipment.Instance.LeftGun;
+			BaseWeapon weapon = playerEquipment.LeftGun;
 			
 			if (weapon != null && weapon.CanFire()) {
 				// Register weapon fired
@@ -57,7 +59,7 @@ public class PlayerWeaponController : MonoBehaviour {
 
 		// Release triggers
 		if (Input.GetMouseButtonUp(0)) {
-			BaseWeapon weapon = Equipment.Instance.RightGun;
+			BaseWeapon weapon = playerEquipment.RightGun;
 
 			// Mark trigger as released
 			weapon.TriggerReleased();
@@ -68,7 +70,7 @@ public class PlayerWeaponController : MonoBehaviour {
 		}
 
 		if (Input.GetMouseButtonUp(1)) {
-			BaseWeapon weapon = Equipment.Instance.LeftGun;
+			BaseWeapon weapon = playerEquipment.LeftGun;
 
 			// Mark trigger as released
 			weapon.TriggerReleased();
@@ -92,12 +94,12 @@ public class PlayerWeaponController : MonoBehaviour {
 		}
 
 		if (newFireMode != -1) {
-			if(Equipment.Instance.CurrentWeaponKit == WeaponKit.TWO_HANDED && newFireMode <= 2) {
-				Equipment.Instance.RightGun.SwitchFireMode(newFireMode);
+			if(playerEquipment.CurrentWeaponKit == WeaponKit.TWO_HANDED && newFireMode <= 2) {
+				playerEquipment.RightGun.SwitchFireMode(newFireMode);
 			} else if (newFireMode <= 1) {
-				Equipment.Instance.RightGun.SwitchFireMode(newFireMode);
+				playerEquipment.RightGun.SwitchFireMode(newFireMode);
 			} else {
-				Equipment.Instance.LeftGun.SwitchFireMode(newFireMode - 2);
+				playerEquipment.LeftGun.SwitchFireMode(newFireMode - 2);
 			}
 		}
 	}
