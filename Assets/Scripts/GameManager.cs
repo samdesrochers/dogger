@@ -17,13 +17,19 @@ public class GameManager : MonoBehaviour {
 		Vector2 spawn = mapBuilder.GetRandomSpawnPoint ();
 
 		this.Player = (GameObject)Instantiate(Resources.Load("Prefabs/Player"), new Vector3(spawn.x, spawn.y, 0), new Quaternion(0, 0, 0, 0));
+		this.Player.name = "Player";
 		this.playerHp = Player.GetComponent<UnitHealth> ();
 		this.playerShield = Player.GetComponent<UnitShield> ();
 
 		this.Enemies = new List<GameObject>();
+		GameObject enemyContainer = new GameObject("Enemies");
+
 		for (int i = 0; i < 100; i++) {
-			spawn = mapBuilder.GetRandomSpawnPoint ();
-			Enemies.Add ((GameObject)Instantiate (Resources.Load ("Prefabs/viciousCat"), new Vector3 (spawn.x, spawn.y, 0), Quaternion.identity));
+			spawn = mapBuilder.GetRandomSpawnPoint();
+			GameObject catClone = Instantiate(Resources.Load("Prefabs/viciousCat"), new Vector3(spawn.x, spawn.y, 0), Quaternion.identity) as GameObject;
+			catClone.name = "Vicious Cat " + i;
+			catClone.transform.parent = enemyContainer.transform;
+			Enemies.Add(catClone);
 		}
 	}
 
