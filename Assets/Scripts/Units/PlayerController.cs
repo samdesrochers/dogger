@@ -86,9 +86,8 @@ public class PlayerController : MonoBehaviour
 		//Verify collision with the ennemies
 		//To do keyvohn, faire que ça pogne le type de unit
 		if (coll.gameObject.tag == "enemy") {
-			this.gameObject.GetComponent<UnitHealth>().TakeDamage(10);
+//			this.gameObject.GetComponent<UnitHealth>().TakeDamage(10);
 			Debug.Log ("Dat collision");
-//			coll.gameObject.SendMessage("TakeDamage", 10, SendMessageOptions.DontRequireReceiver);
 		}
 	}
 }

@@ -29,6 +29,10 @@ public class GameManager : MonoBehaviour {
 			GameObject catClone = Instantiate(Resources.Load("Prefabs/viciousCat"), new Vector3(spawn.x, spawn.y, 0), Quaternion.identity) as GameObject;
 			catClone.name = "Vicious Cat " + i;
 			catClone.transform.parent = enemyContainer.transform;
+
+			EnemyAI catAi = catClone.GetComponent<EnemyAI> ();
+			catAi.Player = this.Player;
+
 			Enemies.Add(catClone);
 		}
 	}
