@@ -12,6 +12,7 @@ public class EnemyAI : MonoBehaviour {
 	private Vector2 walkDirection;
 	private Vector3 walkAmount;
 	private bool didSeePlayer;
+	private bool shouldShoot;
 	private Rigidbody2D cachedRigidBody2D;
 	
 	void Start () {
@@ -45,6 +46,8 @@ public class EnemyAI : MonoBehaviour {
 		if (!didSeePlayer)
 		{
 			if (Vector2.Distance (this.transform.position, this.Player.transform.position) < this.visionDistance) {
+				didSeePlayer = true;
+
 				//Check if the player can be seen by the enemy
 				RaycastHit2D hitInfo = Physics2D.Raycast(this.transform.position, this.Player.transform.position, this.visionDistance);
 				if (hitInfo.collider)
@@ -53,7 +56,7 @@ public class EnemyAI : MonoBehaviour {
 					{
 						Debug.Log( "Can see player!" );
 						//Go full retard
-						didSeePlayer = true;
+						shouldShoot = true;
 					}
 				}
 			}

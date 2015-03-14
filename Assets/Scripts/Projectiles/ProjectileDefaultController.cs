@@ -22,7 +22,7 @@ public class ProjectileDefaultController : MonoBehaviour {
 	void OnCollisionEnter2D(Collision2D coll
 	                     ) {
 		// To change keyvohn
-		if (coll.gameObject.tag != "Player") {
+		if (coll.gameObject.tag == "enemy") {
 			// Blood splash
 			GameObject effectseContainer = GameObject.Find("Effects");
 			if (effectseContainer == null) {
@@ -40,8 +40,8 @@ public class ProjectileDefaultController : MonoBehaviour {
 			spashParticleSystem.Play();
 			Destroy(spashParticleSystem.gameObject, 0.1f);
 
-			coll.gameObject.SendMessage("TakeDamage", 10, SendMessageOptions.DontRequireReceiver);
-			Destroy (this.gameObject);	
+			coll.gameObject.GetComponent<UnitHealth>().TakeDamage(10);
 		}
+		Destroy (this.gameObject);	
 	}
 }
