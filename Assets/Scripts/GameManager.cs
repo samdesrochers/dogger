@@ -35,6 +35,14 @@ public class GameManager : MonoBehaviour {
 
 			Enemies.Add(catClone);
 		}
+
+		//Spawn the boss ! 
+		spawn = mapBuilder.GetRandomSpawnPoint();
+		GameObject henriClone = Instantiate(Resources.Load("Prefabs/HenriTheDrizzle"), new Vector3(spawn.x, spawn.y, 0), Quaternion.identity) as GameObject;
+		henriClone.name = "Henri The Drizzle";
+		
+		EnemyAI henriAi = henriClone.GetComponent<EnemyAI> ();
+		henriAi.Player = this.Player;
 	}
 
 	private void pause()

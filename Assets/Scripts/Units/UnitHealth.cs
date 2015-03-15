@@ -5,6 +5,7 @@ public class UnitHealth : MonoBehaviour
 {
 	public float health = 100f;
 
+	private bool canDropLoot;
 	private GameManager gameManager;
 
 	// To add keyvohn,
@@ -12,6 +13,7 @@ public class UnitHealth : MonoBehaviour
 
 	void Start () {
 		this.gameManager = (GameManager)GameObject.Find ("GameManager").GetComponent<GameManager>();
+		canDropLoot = true;
 	}
 	
 	public void TakeDamage (float amount)
@@ -27,7 +29,18 @@ public class UnitHealth : MonoBehaviour
 
 	private void unitDied()
 	{
+		//Drop loot on the ground
+		this.dropLootIfNeeded ();
+
 		//Tell the game manager that a unit died
 		this.gameManager.unitDied (this.gameObject);
+	}
+
+	private void dropLootIfNeeded()
+	{
+		if (!canDropLoot)
+		{
+
+		}
 	}
 }

@@ -880,4 +880,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PotentialSpawnPoints: []
   InitialPosition: {x: 0, y: 0}
-  DesiredSize: 80
+  DesiredSize: 20
